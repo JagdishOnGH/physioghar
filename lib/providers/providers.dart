@@ -14,6 +14,8 @@ class ScheduleState {
     required this.selectedDay,
   });
 
+  bool get isAvailable => isAvailableForEmergency;
+
   ScheduleState copyWith({
     List<Slot>? slots,
     bool? isAvailableForEmergency,
@@ -47,23 +49,19 @@ class ScheduleNotifier extends Notifier<ScheduleState> {
 
   void blockSlot(String slotId) {
     state = state.copyWith(
-      slots: state.slots.map((s) {
-        if (s.id == slotId) {
-          return s.copyWith(status: SlotStatus.blocked);
-        }
-        return s;
-      }).toList(),
+      slots: [
+        for (final s in state.slots)
+          if (s.id == slotId) s.copyWith(status: SlotStatus.blocked) else s
+      ],
     );
   }
 
   void unblockSlot(String slotId) {
     state = state.copyWith(
-      slots: state.slots.map((s) {
-        if (s.id == slotId) {
-          return s.copyWith(status: SlotStatus.open);
-        }
-        return s;
-      }).toList(),
+      slots: [
+        for (final s in state.slots)
+          if (s.id == slotId) s.copyWith(status: SlotStatus.open) else s
+      ],
     );
   }
 

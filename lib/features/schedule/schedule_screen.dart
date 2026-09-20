@@ -16,10 +16,11 @@ class ScheduleScreen extends ConsumerStatefulWidget {
 
 class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
   final List<String> days = ['Today', 'Tomorrow', 'Oct 26', 'Oct 27'];
+  String _selectedDay = 'Today';
 
   void _showAddSlotSheet(BuildContext context) {
     final timeController = TextEditingController();
-    String selectedDay = ref.read(scheduleProvider).selectedDay;
+    String targetDay = _selectedDay;
 
     showModalBottomSheet(
       context: context,
@@ -43,7 +44,7 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
               Wrap(
                 spacing: 8,
                 children: days.map((day) {
-                  final isSelected = selectedDay == day;
+                  final isSelected = targetDay == day;
                   return ChoiceChip(
                     label: Text(day),
                     selected: isSelected,
@@ -54,7 +55,7 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                     ),
                     onSelected: (val) {
                       if (val) {
-                        setSheetState(() => selectedDay = day);
+                        setSheetState(() => targetDay = day);
                       }
                     },
                   );
@@ -87,10 +88,10 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                     );
                     return;
                   }
-                  ref.read(scheduleProvider.notifier).addSlot(selectedDay, timeController.text.trim());
+                  ref.read(scheduleProvider.notifier).addSlot(targetDay, timeController.text.trim());
                   Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Added new slot for $selectedDay')),
+                    SnackBar(content: Text('Added new slot for $targetDay')),
                   );
                 },
               ),
@@ -102,7 +103,58 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
     );
   }
 
-  void _confirmSlotAction(BuildContext context, Slot slot) {
+  void _showSlotActionSheet(BuildContext context, Slot slot) {
+    if (slot.status == SlotStatus.booked) {
+      showModalBottomSheet(
+        context: context,
+        backgroundColor: Colors.transparent,
+        builder: (ctx) => BottomSheetWrapper(
+          title: 'Booked Session Info',
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  CircleAvatar(
+                    radius: 24,
+                    backgroundImage: slot.patientAvatar != null ? NetworkImage(slot.patientAvatar!) : null,
+                  ),
+                  const SizedBox(width: 12),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        slot.patientName ?? 'Booked Patient',
+                        style: GoogleFonts.fraunces(fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        'Time: ${slot.timeRange}',
+                        style: GoogleFonts.inter(fontSize: 13, color: AppColors.textSecondary),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: AppColors.accentPale,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Text(
+                  'Booked slots are read-only in the Schedule manager. Manage appointment status under Bookings.',
+                  style: GoogleFonts.inter(fontSize: 12, color: AppColors.textSecondary),
+                ),
+              ),
+              const SizedBox(height: 20),
+            ],
+          ),
+        ),
+      );
+      return;
+    }
+
     final isBlocked = slot.status == SlotStatus.blocked;
     showModalBottomSheet(
       context: context,
@@ -172,8 +224,8 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
   @override
   Widget build(BuildContext context) {
     final scheduleState = ref.watch(scheduleProvider);
-    final selectedDay = scheduleState.selectedDay;
-    final daySlots = scheduleState.slots.where((s) => s.dayName == selectedDay).toList();
+    final isAvailable = ref.watch(scheduleProvider.select((s) => s.isAvailable));
+    final daySlots = scheduleState.slots.where((s) => s.dayName == _selectedDay).toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -182,6 +234,42 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
           style: GoogleFonts.fraunces(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         actions: [
+          InkWell(
+            onTap: () {
+              ref.read(scheduleProvider.notifier).toggleAvailability();
+            },
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              margin: const EdgeInsets.only(right: 8),
+              decoration: BoxDecoration(
+                color: isAvailable ? AppColors.primary : AppColors.bgNeutral,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: 8,
+                    height: 8,
+                    decoration: BoxDecoration(
+                      color: isAvailable ? AppColors.accent : AppColors.textMuted,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                  const SizedBox(width: 6),
+                  Text(
+                    isAvailable ? 'Available' : 'Busy',
+                    style: GoogleFonts.inter(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: isAvailable ? Colors.white : AppColors.textSecondary,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
           IconButton(
             icon: const Icon(Icons.add_alarm, color: AppColors.primary),
             onPressed: () => _showAddSlotSheet(context),
@@ -198,7 +286,7 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: days.map((day) {
-                  final isSelected = selectedDay == day;
+                  final isSelected = _selectedDay == day;
                   return Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: ChoiceChip(
@@ -213,7 +301,9 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                       ),
                       onSelected: (val) {
                         if (val) {
-                          ref.read(scheduleProvider.notifier).setSelectedDay(day);
+                          setState(() {
+                            _selectedDay = day;
+                          });
                         }
                       },
                     ),
@@ -237,74 +327,63 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                       final slot = daySlots[index];
                       return Card(
                         margin: const EdgeInsets.only(bottom: 12),
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Row(
-                            children: [
-                              _buildSlotShapeIcon(slot.status),
-                              const SizedBox(width: 14),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      slot.timeRange,
-                                      style: GoogleFonts.inter(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w600,
-                                        color: AppColors.textPrimary,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 4),
-                                    if (slot.status == SlotStatus.booked && slot.patientName != null)
-                                      Row(
-                                        children: [
-                                          CircleAvatar(
-                                            radius: 10,
-                                            backgroundImage: slot.patientAvatar != null
-                                                ? NetworkImage(slot.patientAvatar!)
-                                                : null,
-                                          ),
-                                          const SizedBox(width: 6),
-                                          Text(
-                                            slot.patientName!,
-                                            style: GoogleFonts.inter(
-                                              fontSize: 13,
-                                              color: AppColors.textSecondary,
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                    else
+                        child: InkWell(
+                          onTap: () => _showSlotActionSheet(context, slot),
+                          borderRadius: BorderRadius.circular(16),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: Row(
+                              children: [
+                                _buildSlotShapeIcon(slot.status),
+                                const SizedBox(width: 14),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
                                       Text(
-                                        slot.status == SlotStatus.open
-                                            ? 'Available for booking'
-                                            : 'Blocked by therapist',
+                                        slot.timeRange,
                                         style: GoogleFonts.inter(
-                                          fontSize: 12,
-                                          color: AppColors.textMuted,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w600,
+                                          color: AppColors.textPrimary,
                                         ),
                                       ),
-                                  ],
-                                ),
-                              ),
-                              StatusPill.fromSlotStatus(slot.status),
-                              if (slot.status != SlotStatus.booked) ...[
-                                const SizedBox(width: 8),
-                                IconButton(
-                                  icon: Icon(
-                                    slot.status == SlotStatus.blocked
-                                        ? Icons.lock_open
-                                        : Icons.block,
-                                    size: 20,
-                                    color: slot.status == SlotStatus.blocked
-                                        ? AppColors.primary
-                                        : AppColors.textMuted,
+                                      const SizedBox(height: 4),
+                                      if (slot.status == SlotStatus.booked && slot.patientName != null)
+                                        Row(
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 10,
+                                              backgroundImage: slot.patientAvatar != null
+                                                  ? NetworkImage(slot.patientAvatar!)
+                                                  : null,
+                                            ),
+                                            const SizedBox(width: 6),
+                                            Text(
+                                              slot.patientName!,
+                                              style: GoogleFonts.inter(
+                                                fontSize: 13,
+                                                color: AppColors.textSecondary,
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      else
+                                        Text(
+                                          slot.status == SlotStatus.open
+                                              ? 'Available for booking'
+                                              : 'Blocked by therapist',
+                                          style: GoogleFonts.inter(
+                                            fontSize: 12,
+                                            color: AppColors.textMuted,
+                                          ),
+                                        ),
+                                    ],
                                   ),
-                                  onPressed: () => _confirmSlotAction(context, slot),
                                 ),
+                                StatusPill.fromSlotStatus(slot.status),
                               ],
-                            ],
+                            ),
                           ),
                         ),
                       );
