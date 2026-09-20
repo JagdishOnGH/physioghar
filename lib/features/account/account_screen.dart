@@ -1,27 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/widgets/screen_launcher.dart';
-import '../../providers/providers.dart';
 import 'profile_screen.dart';
 import 'edit_profile_screen.dart';
 import 'language_screen.dart';
 import '../complaints/complaints_screen.dart';
 
-class AccountScreen extends ConsumerWidget {
+class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
 
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final profile = ref.watch(profileProvider);
-    final locale = ref.watch(localeProvider);
-    final localeNotifier = ref.read(localeProvider.notifier);
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('Log Out', style: GoogleFonts.fraunces(fontWeight: FontWeight.bold)),
+        content: Text('Are you sure you want to log out of your therapist session?', style: GoogleFonts.inter(fontSize: 14)),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: Text('Cancel', style: GoogleFonts.inter(color: AppColors.textSecondary)),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(ctx);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Logged out of demo session.')),
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.error,
+              foregroundColor: Colors.white,
+            ),
+            child: Text('Log Out', style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
+          ),
+        ],
+      ),
+    );
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          localeNotifier.translate('account'),
+          'Account & Settings',
           style: GoogleFonts.fraunces(fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),
@@ -38,9 +61,9 @@ class AccountScreen extends ConsumerWidget {
               ),
               child: Row(
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 30,
-                    backgroundImage: NetworkImage(profile.avatarUrl),
+                    backgroundImage: NetworkImage('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=200'),
                   ),
                   const SizedBox(width: 14),
                   Expanded(
@@ -48,7 +71,7 @@ class AccountScreen extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          profile.name,
+                          'Dr. Sarah Jensen, PT',
                           style: GoogleFonts.fraunces(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -57,7 +80,7 @@ class AccountScreen extends ConsumerWidget {
                         ),
                         const SizedBox(height: 2),
                         Text(
-                          profile.title,
+                          'Senior Physical Therapist',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: GoogleFonts.inter(
@@ -67,7 +90,7 @@ class AccountScreen extends ConsumerWidget {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          profile.email,
+                          'sarah.jensen@physioghar.org',
                           style: GoogleFonts.inter(
                             fontSize: 12,
                             color: AppColors.textMuted,
@@ -131,7 +154,7 @@ class AccountScreen extends ConsumerWidget {
                 _MenuItem(
                   icon: Icons.language,
                   title: 'Language Settings',
-                  subtitle: 'Current: ${locale == AppLocale.en ? "English" : "Nepali (नेपाली)"}',
+                  subtitle: 'Switch application locale (English / Nepali)',
                   onTap: () {
                     Navigator.push(
                       context,
@@ -149,6 +172,19 @@ class AccountScreen extends ConsumerWidget {
                       MaterialPageRoute(builder: (_) => const ComplaintsScreen()),
                     );
                   },
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            _buildMenuSection(
+              context,
+              title: 'SESSION',
+              items: [
+                _MenuItem(
+                  icon: Icons.logout,
+                  title: 'Log Out',
+                  subtitle: 'End therapist session',
+                  onTap: () => _showLogoutDialog(context),
                 ),
               ],
             ),

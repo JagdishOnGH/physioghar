@@ -1,0 +1,88 @@
+================================================================================
+PHYSIOGHAR THERAPIST APP PROTOTYPE - WHAT TO EXPECT (CODE & FUNCTIONALITY)
+================================================================================
+
+--------------------------------------------------------------------------------
+1. CODE ARCHITECTURE & DESIGN PATTERNS
+--------------------------------------------------------------------------------
+- STATE MANAGEMENT (RIVERPOD 2.X):
+  * Built using Riverpod Notifier & NotifierProvider across single-source-of-truth domains:
+    - scheduleProvider: owns weekly slots, slot status (open/booked/blocked), and emergency availability.
+    - bookingProvider: owns requests, upcoming sessions, completed sessions (with clinical remarks), and cancelled sessions.
+    - patientProvider: owns patient directory records and persistent clinical notes per patient.
+    - profileProvider: owns therapist credentials, bio, specializations, and clinic contact info.
+    - localeProvider: owns application language locale (English / Nepali) and translation mappings.
+
+- UI SEPARATION & SCOPED REBUILDS:
+  * Read-only aggregator views (e.g. Dashboard) use .select() to watch exact state slices and minimize rebuilds.
+  * Stateless navigation views (e.g. Account Menu) contain zero Riverpod refs, using pure Navigator.push().
+  * Local transient UI states (search filter query, active tab index, form controllers, modal dialog visibilities) stay strictly in local StatefulWidget / ConsumerStatefulWidget state and are NOT pushed into global providers.
+
+- DESIGN TOKENS & TYPOGRAPHY:
+  * Curated Palette: Pine (#2F5D50), Pine Light (#3F7965), Pine Pale (#D1E8DF), Amber (#E2962F), Amber Pale (#FBEFD9), Ink (#1E2A2E), Mist (#EEF1ED), Cream (#FBFBF8).
+  * Google Fonts Integration:
+    - Headings & Large Numbers: Fraunces
+    - Body, Buttons & Labels: Inter
+    - Eyebrow tags & Ticket Reference IDs: IBM Plex Mono
+
+--------------------------------------------------------------------------------
+2. FUNCTIONALITY & USER FLOWS (ALL 10 SCREENS)
+--------------------------------------------------------------------------------
+[1] DASHBOARD SCREEN:
+    - Summary stat cards showing Requests count, Today's sessions count, Completed count, and Emergency status.
+    - Interactive Emergency Availability toggle switch.
+    - Today's upcoming sessions list with quick action sheets.
+    - Screen catalog quick-launcher button floating header.
+
+[2] SCHEDULE & AVAILABILITY SCREEN (⭐):
+    - Weekly day filter chips (Today, Mon, Tue, Wed, Thu, Fri, Sat).
+    - Distinct Slot Status styling (OPEN = green pill, BOOKED = primary card, BLOCKED = neutral/dashed border).
+    - Slot actions sheet: Block Open Slot / Unblock Blocked Slot.
+    - Add New Slot modal form with time picker and day selection.
+
+[3] BOOKINGS & SESSIONS SCREEN (⭐):
+    - 4-Tab Navigation: Requests, Upcoming, Completed, Cancelled.
+    - Pending Requests Tab: "Accept" moves request to Upcoming; "Decline" shows confirmation sheet and moves to Cancelled.
+    - Upcoming Tab: "Mark Complete" opens optional clinical remarks dialog and moves session to Completed; "Reschedule" opens date/time picker sheet.
+    - Completed & Cancelled Tabs: Card list view displaying clinical remarks and session details.
+
+[4] PATIENT LIST SCREEN:
+    - Directory list displaying patient avatar, age, gender, primary condition, session count, and last visit date.
+    - Client-side search bar filtering by name or condition using local widget state.
+    - Tapping any patient row performs pure navigation to Patient Detail Screen.
+
+[5] PATIENT DETAIL & NOTES SCREEN (⭐):
+    - Full patient bio card with contact details and visit history.
+    - Persistent Clinical Notes list.
+    - "Add Note" floating/header button opens modal form -> appends note to patientProvider.
+    - Edit icon on note card opens pre-filled form -> updates note in patientProvider.
+    - Note Persistence Guarantee: Navigating away and back maintains all newly added/edited notes because they live in patientProvider.
+
+[6] ACCOUNT MENU SCREEN:
+    - Navigation hub linking to Profile, Edit Profile, Language Settings, Report an Issue, and the 10-Screen Catalog launcher.
+    - Interactive "Log Out" item showing confirmation dialog (local widget state).
+
+[7] THERAPIST PROFILE SCREEN:
+    - Read-only profile view with rating, experience stat cards, bio, specializations tags, and clinic contact info.
+    - "Edit Profile" button performs pure navigation.
+
+[8] EDIT PROFILE SCREEN:
+    - Form pre-populated with therapist data using local TextEditingControllers.
+    - Validation on full name, title, email format, phone, address, and specializations.
+    - "Save Changes" updates profileProvider and pops back, causing ProfileScreen to automatically re-render.
+
+[9] LANGUAGE SETTINGS SCREEN:
+    - Radio selection list for English and Nepali.
+    - Selecting an option updates localeProvider state and updates translated string key labels across watched widgets.
+
+[10] REPORT AN ISSUE / COMPLAINTS SCREEN:
+    - Form with category dropdown (App Bug, Schedule Conflict, Payment Inquiry, Patient Conduct, Other), subject, and description.
+    - Form validation requiring minimum description length.
+    - On submit: Displays a dedicated Success View with a unique ticket reference ID (e.g. PG-TKT-12345) and button to submit another issue.
+
+--------------------------------------------------------------------------------
+3. TESTING & BUILD STABILITY
+--------------------------------------------------------------------------------
+- STATIC ANALYSIS: `fvm flutter analyze` -> 0 errors, 0 warnings.
+- WIDGET TESTS: `fvm flutter test` -> 100% test pass.
+- AST KNOWLEDGE GRAPH: `graphify update .` synced.

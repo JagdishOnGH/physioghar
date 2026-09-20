@@ -7,16 +7,22 @@ import '../../core/widgets/shared_widgets.dart';
 import '../../providers/providers.dart';
 import 'patient_detail_screen.dart';
 
-class PatientListScreen extends ConsumerWidget {
+class PatientListScreen extends ConsumerStatefulWidget {
   const PatientListScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final patientState = ref.watch(patientProvider);
-    final patientNotifier = ref.read(patientProvider.notifier);
+  ConsumerState<PatientListScreen> createState() => _PatientListScreenState();
+}
 
-    final query = patientState.searchQuery.toLowerCase();
-    final filteredPatients = patientState.patients.where((p) {
+class _PatientListScreenState extends ConsumerState<PatientListScreen> {
+  String _searchQuery = '';
+
+  @override
+  Widget build(BuildContext context) {
+    final patients = ref.watch(patientProvider.select((p) => p.patients));
+
+    final query = _searchQuery.toLowerCase();
+    final filteredPatients = patients.where((p) {
       return p.name.toLowerCase().contains(query) || p.primaryCondition.toLowerCase().contains(query);
     }).toList();
 
@@ -32,14 +38,14 @@ class PatientListScreen extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.all(16),
             child: TextField(
-              onChanged: (val) => patientNotifier.setSearchQuery(val),
+              onChanged: (val) => setState(() => _searchQuery = val),
               decoration: InputDecoration(
                 hintText: 'Search patients by name or condition...',
                 prefixIcon: const Icon(Icons.search, color: AppColors.textMuted),
-                suffixIcon: patientState.searchQuery.isNotEmpty
+                suffixIcon: _searchQuery.isNotEmpty
                     ? IconButton(
                         icon: const Icon(Icons.clear, color: AppColors.textMuted),
-                        onPressed: () => patientNotifier.setSearchQuery(''),
+                        onPressed: () => setState(() => _searchQuery = ''),
                       )
                     : null,
               ),

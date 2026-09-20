@@ -217,6 +217,10 @@ class PatientNotifier extends Notifier<PatientState> {
       }).toList(),
     );
   }
+
+  void editNote(String noteId, String title, String content, String tag) {
+    updateNote(noteId, title, content, tag);
+  }
 }
 
 final patientProvider = NotifierProvider<PatientNotifier, PatientState>(PatientNotifier.new);
@@ -244,6 +248,26 @@ class ProfileNotifier extends Notifier<TherapistProfile> {
       clinicAddress: clinicAddress,
       bio: bio,
       specializations: specializations,
+    );
+  }
+
+  void update({
+    String? name,
+    String? title,
+    String? email,
+    String? phone,
+    String? clinicAddress,
+    String? bio,
+    List<String>? specializations,
+  }) {
+    state = state.copyWith(
+      name: name ?? state.name,
+      title: title ?? state.title,
+      email: email ?? state.email,
+      phone: phone ?? state.phone,
+      clinicAddress: clinicAddress ?? state.clinicAddress,
+      bio: bio ?? state.bio,
+      specializations: specializations ?? state.specializations,
     );
   }
 }

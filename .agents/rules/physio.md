@@ -6,6 +6,8 @@ trigger: always_on
 
 Flutter prototype. Therapist-side only. No backend — mock data + local state only. Riverpod for state.
 
+After each finishes commit the update.
+
 ## Stack
 
 - Flutter (stable) + Dart
