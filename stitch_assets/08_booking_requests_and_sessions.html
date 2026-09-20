@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Serene Mind - Booking Requests &amp; Session Management</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-tertiary-fixed-variant": "#663e00",
+            "tertiary-container": "#794a00",
+            "on-background": "#1a1c1b",
+            "on-primary-fixed": "#002019",
+            "on-tertiary-fixed": "#2b1700",
+            "surface-container-lowest": "#ffffff",
+            "secondary-fixed": "#b2efd7",
+            "primary": "#154539",
+            "secondary-fixed-dim": "#97d3bb",
+            "on-secondary-fixed": "#002117",
+            "tertiary": "#593500",
+            "error-container": "#ffdad6",
+            "surface-variant": "#e2e3e0",
+            "on-primary": "#ffffff",
+            "on-secondary": "#ffffff",
+            "inverse-on-surface": "#f1f1ee",
+            "surface-container-high": "#e8e8e5",
+            "surface": "#f9f9f6",
+            "outline": "#717975",
+            "on-secondary-container": "#336d59",
+            "tertiary-fixed-dim": "#ffb963",
+            "surface-container-low": "#f4f4f1",
+            "primary-fixed": "#bceddc",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed-variant": "#204f42",
+            "inverse-primary": "#a0d1c0",
+            "outline-variant": "#c0c8c4",
+            "on-error-container": "#93000a",
+            "on-surface-variant": "#404945",
+            "secondary-container": "#afecd4",
+            "secondary": "#2e6955",
+            "tertiary-fixed": "#ffddb9",
+            "surface-tint": "#396759",
+            "inverse-surface": "#2f312f",
+            "on-tertiary-container": "#ffbc6d",
+            "error": "#ba1a1a",
+            "surface-container-highest": "#e2e3e0",
+            "primary-fixed-dim": "#a0d1c0",
+            "on-error": "#ffffff",
+            "on-primary-container": "#a3d4c3",
+            "primary-container": "#2f5d50",
+            "surface-container": "#eeeeeb",
+            "on-surface": "#1a1c1b",
+            "background": "#f9f9f6",
+            "surface-dim": "#dadad7",
+            "on-secondary-fixed-variant": "#10503e",
+            "surface-bright": "#f9f9f6"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "2xl": "1rem",
+            "full": "9999px"
+          },
+          fontFamily: {
+            "body-lg": ["Inter", "sans-serif"],
+            "label-md": ["Inter", "sans-serif"],
+            "display-lg-mobile": ["Newsreader", "serif"],
+            "display-lg": ["Newsreader", "serif"],
+            "headline-sm": ["Newsreader", "serif"],
+            "numerical-highlight": ["Newsreader", "serif"],
+            "label-lg": ["Inter", "sans-serif"],
+            "body-sm": ["Inter", "sans-serif"],
+            "title-md": ["Inter", "sans-serif"],
+            "title-lg": ["Inter", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"],
+            "headline-lg": ["Newsreader", "serif"],
+            "headline-md": ["Newsreader", "serif"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      display: none;
+    }
+    .custom-scroll {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#FBFBF8] text-[#1E2A2E] font-['Inter',sans-serif] min-h-screen flex justify-center selection:bg-[#2F5D50] selection:text-white">
+<!-- Mobile/Tablet Frame for Clinical App View -->
+<div class="w-full max-w-[480px] min-h-screen bg-[#FBFBF8] flex flex-col justify-between shadow-2xl relative border-x border-[#EEF1ED]">
+<!-- Top Clinical App Bar & Brand Context -->
+<header class="sticky top-0 z-30 bg-[#FBFBF8]/90 backdrop-blur-md border-b border-[#EEF1ED]">
+<!-- Status bar placeholder / Clinic context -->
+<div class="px-5 pt-3 pb-2 flex items-center justify-between text-xs text-[#4A5854] font-medium">
+<div class="flex items-center gap-1.5">
+<span class="inline-block w-2 h-2 rounded-full bg-[#2F5D50]"></span>
+<span>Serene Mind Clinical Suite</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-full bg-[#D1E8DF] text-[#154539] text-[11px] font-semibold tracking-wide">Dr. Jennifer Vance, PsyD</span>
+</div>
+</div>
+<!-- Main Title Section -->
+<div class="px-5 pt-2 pb-3">
+<div class="flex items-center justify-between">
+<div>
+<h1 class="font-['Newsreader',serif] text-2xl font-medium tracking-tight text-[#1E2A2E] leading-tight">Bookings &amp; Sessions</h1>
+<p class="text-xs text-[#4A5854] font-normal mt-0.5">Manage intake requests &amp; scheduled appointments</p>
+</div>
+<div class="flex items-center gap-1.5">
+<button aria-label="Search" class="w-9 h-9 rounded-full bg-white border border-[#EEF1ED] flex items-center justify-center text-[#4A5854] hover:text-[#1E2A2E] hover:bg-[#EEF1ED]/50 transition-all shadow-sm">
+<span class="material-symbols-outlined text-[19px]">search</span>
+</button>
+<button aria-label="Notifications" class="w-9 h-9 rounded-full bg-white border border-[#EEF1ED] flex items-center justify-center text-[#4A5854] hover:text-[#1E2A2E] hover:bg-[#EEF1ED]/50 transition-all shadow-sm relative">
+<span class="material-symbols-outlined text-[19px]">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#E2962F]"></span>
+</button>
+</div>
+</div>
+<!-- Segmented 4-Tab Navigation -->
+<div class="mt-4 flex border-b border-[#EEF1ED] gap-1 overflow-x-auto custom-scroll">
+<!-- Active Tab: Requests (3) -->
+<button class="relative flex items-center gap-1.5 pb-2.5 px-2 border-b-2 border-[#2F5D50] text-[#1E2A2E] font-semibold text-xs transition-colors whitespace-nowrap">
+<span>Requests</span>
+<span class="px-1.5 py-0.2 rounded-full bg-[#FBEFD9] text-[#9A5B10] text-[10px] font-bold">3</span>
+</button>
+<!-- Upcoming (5) -->
+<button class="relative flex items-center gap-1.5 pb-2.5 px-2 border-b-2 border-transparent text-[#4A5854] hover:text-[#1E2A2E] font-medium text-xs transition-colors whitespace-nowrap">
+<span>Upcoming</span>
+<span class="px-1.5 py-0.2 rounded-full bg-[#EEF1ED] text-[#4A5854] text-[10px]">5</span>
+</button>
+<!-- Completed (18) -->
+<button class="relative flex items-center gap-1.5 pb-2.5 px-2 border-b-2 border-transparent text-[#4A5854] hover:text-[#1E2A2E] font-medium text-xs transition-colors whitespace-nowrap">
+<span>Completed</span>
+<span class="px-1.5 py-0.2 rounded-full bg-[#EEF1ED] text-[#4A5854] text-[10px]">18</span>
+</button>
+<!-- Cancelled (2) -->
+<button class="relative flex items-center gap-1.5 pb-2.5 px-2 border-b-2 border-transparent text-[#4A5854] hover:text-[#1E2A2E] font-medium text-xs transition-colors whitespace-nowrap">
+<span>Cancelled</span>
+<span class="px-1.5 py-0.2 rounded-full bg-[#EEF1ED] text-[#4A5854] text-[10px]">2</span>
+</button>
+</div>
+<!-- Filter Pill Chips -->
+<div class="flex items-center gap-2 pt-3 overflow-x-auto custom-scroll">
+<button class="h-7 px-3 rounded-full bg-[#2F5D50] text-white text-[11px] font-medium flex items-center gap-1 shrink-0 shadow-sm">
+<span>All Modalities</span>
+<span class="material-symbols-outlined text-[14px]">expand_more</span>
+</button>
+<button class="h-7 px-3 rounded-full bg-white border border-[#EEF1ED] text-[#4A5854] hover:text-[#1E2A2E] text-[11px] font-medium flex items-center gap-1.5 shrink-0">
+<span class="material-symbols-outlined text-[14px] text-[#2F5D50]">videocam</span>
+<span>Telehealth</span>
+</button>
+<button class="h-7 px-3 rounded-full bg-white border border-[#EEF1ED] text-[#4A5854] hover:text-[#1E2A2E] text-[11px] font-medium flex items-center gap-1.5 shrink-0">
+<span class="material-symbols-outlined text-[14px] text-[#2F5D50]">domain</span>
+<span>In-Person</span>
+</button>
+<button class="h-7 px-2.5 rounded-full bg-white border border-[#EEF1ED] text-[#4A5854] hover:text-[#1E2A2E] text-[11px] font-medium flex items-center gap-1 shrink-0">
+<span class="material-symbols-outlined text-[14px]">tune</span>
+<span>Urgent</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Scrollable Content Canvas -->
+<main class="flex-1 px-4 py-4 space-y-4 overflow-y-auto">
+<!-- Section Title & Counter Summary -->
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#E2962F] animate-pulse"></span>
+<h2 class="text-xs font-semibold uppercase tracking-wider text-[#4A5854]">Pending Intake Inquiries (3)</h2>
+</div>
+<span class="text-[11px] text-[#4A5854]">SLA response: &lt; 24h</span>
+</div>
+<!-- CARD 1: Hannah Morales (Urgent / Recent) -->
+<article class="bg-white rounded-2xl border border-[#EEF1ED] p-4 shadow-[0_2px_8px_rgba(30,42,46,0.04)] hover:shadow-[0_4px_12px_rgba(30,42,46,0.06)] transition-all">
+<!-- Card Top Bar: Status Badge + Timestamp -->
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-[#D1E8DF] flex items-center justify-center text-[#154539] font-semibold text-sm">
+              HM
+            </div>
+<div>
+<div class="flex items-center gap-1.5">
+<h3 class="font-['Inter'] font-semibold text-sm text-[#1E2A2E] leading-tight">Hannah Morales</h3>
+<span class="px-1.5 py-0.2 rounded-full bg-[#D1E8DF]/60 text-[#154539] text-[10px] font-medium">New Client</span>
+</div>
+<p class="text-[11px] text-[#4A5854] mt-0.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-[#E2962F]">schedule</span>
+<span>Submitted 35 min ago</span>
+</p>
+</div>
+</div>
+<!-- Status Badge -->
+<span class="px-2.5 py-1 rounded-full bg-[#FBEFD9] text-[#9A5B10] text-[11px] font-medium tracking-tight whitespace-nowrap border border-[#F4DCB7]">
+            Awaiting Therapist
+          </span>
+</div>
+<!-- Appointment Time & Modality Badges -->
+<div class="bg-[#FBFBF8] rounded-xl p-2.5 border border-[#EEF1ED] mb-3 space-y-1.5">
+<div class="flex items-center text-xs text-[#1E2A2E] font-medium gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#2F5D50]">calendar_month</span>
+<span>Tomorrow, Oct 25 • 02:00 PM – 02:50 PM</span>
+</div>
+<div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-white border border-[#EEF1ED] text-[11px] font-medium text-[#1E2A2E]">
+<span class="material-symbols-outlined text-[13px] text-[#2F5D50]">videocam</span>
+<span>Telehealth (Video Call)</span>
+</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#EEF1ED] text-[11px] font-medium text-[#4A5854]">
+<span class="material-symbols-outlined text-[13px] text-[#2F5D50]">psychology</span>
+<span>Anxiety &amp; Panic Management (Intake)</span>
+</span>
+</div>
+</div>
+<!-- Clinical Notes / Referral Details -->
+<div class="text-xs text-[#4A5854] bg-white border-l-2 border-[#2F5D50] pl-2.5 py-1 mb-4 leading-relaxed">
+<p class="font-medium text-[#1E2A2E] text-[11px] mb-0.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-[#2F5D50]">clinical_notes</span>
+<span>Intake Screening Summary</span>
+</p>
+<p class="italic text-[11px] text-[#4A5854]">"Referred by Dr. Aris. Experiencing acute workplace anxiety and sleep disruption for past 3 weeks."</p>
+</div>
+<!-- Action CTAs -->
+<div class="flex items-center gap-2 pt-1 border-t border-[#EEF1ED]">
+<button class="flex-1 h-9 rounded-xl border border-[#C84B4B]/40 text-[#C84B4B] hover:bg-[#FCE8E8] hover:border-[#C84B4B] text-xs font-semibold flex items-center justify-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px]">close</span>
+<span>Decline</span>
+</button>
+<button class="flex-1 h-9 rounded-xl bg-[#2F5D50] hover:bg-[#154539] text-white text-xs font-semibold flex items-center justify-center gap-1 shadow-sm transition-colors">
+<span class="material-symbols-outlined text-[16px]">check</span>
+<span>Accept Session</span>
+</button>
+</div>
+</article>
+<!-- CARD 2: Liam O'Connor -->
+<article class="bg-white rounded-2xl border border-[#EEF1ED] p-4 shadow-[0_2px_8px_rgba(30,42,46,0.04)] hover:shadow-[0_4px_12px_rgba(30,42,46,0.06)] transition-all">
+<!-- Card Top Bar: Avatar + Patient name -->
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-[#EEF1ED] flex items-center justify-center text-[#1E2A2E] font-semibold text-sm">
+              LO
+            </div>
+<div>
+<div class="flex items-center gap-1.5">
+<h3 class="font-['Inter'] font-semibold text-sm text-[#1E2A2E] leading-tight">Liam O'Connor</h3>
+<span class="px-1.5 py-0.2 rounded-full bg-[#EEF1ED] text-[#4A5854] text-[10px] font-medium">Self-Pay</span>
+</div>
+<p class="text-[11px] text-[#4A5854] mt-0.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-[#4A5854]">schedule</span>
+<span>Requested 2 hrs ago</span>
+</p>
+</div>
+</div>
+<!-- Status Badge -->
+<span class="px-2.5 py-1 rounded-full bg-[#FBEFD9] text-[#9A5B10] text-[11px] font-medium tracking-tight whitespace-nowrap border border-[#F4DCB7]">
+            Pending Review
+          </span>
+</div>
+<!-- Appointment Time & Modality Badges -->
+<div class="bg-[#FBFBF8] rounded-xl p-2.5 border border-[#EEF1ED] mb-3 space-y-1.5">
+<div class="flex items-center text-xs text-[#1E2A2E] font-medium gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#2F5D50]">calendar_month</span>
+<span>Monday, Oct 28 • 10:00 AM – 10:50 AM</span>
+</div>
+<div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-white border border-[#EEF1ED] text-[11px] font-medium text-[#1E2A2E]">
+<span class="material-symbols-outlined text-[13px] text-[#2F5D50]">apartment</span>
+<span>In-Person • Suite 4B</span>
+</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#EEF1ED] text-[11px] font-medium text-[#4A5854]">
+<span class="material-symbols-outlined text-[13px] text-[#2F5D50]">psychology_alt</span>
+<span>Adult ADHD Consultation</span>
+</span>
+</div>
+</div>
+<!-- Patient Note -->
+<div class="text-xs text-[#4A5854] bg-white border-l-2 border-[#4A5854] pl-2.5 py-1 mb-4 leading-relaxed">
+<p class="font-medium text-[#1E2A2E] text-[11px] mb-0.5">Patient Request Memo</p>
+<p class="italic text-[11px] text-[#4A5854]">"Seeking diagnosis evaluation and behavioral executive function strategies."</p>
+</div>
+<!-- Action CTAs -->
+<div class="flex items-center gap-2 pt-1 border-t border-[#EEF1ED]">
+<button class="flex-1 h-9 rounded-xl border border-[#C84B4B]/40 text-[#C84B4B] hover:bg-[#FCE8E8] hover:border-[#C84B4B] text-xs font-semibold flex items-center justify-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px]">close</span>
+<span>Decline</span>
+</button>
+<button class="flex-1 h-9 rounded-xl bg-[#2F5D50] hover:bg-[#154539] text-white text-xs font-semibold flex items-center justify-center gap-1 shadow-sm transition-colors">
+<span class="material-symbols-outlined text-[16px]">check</span>
+<span>Accept Session</span>
+</button>
+</div>
+</article>
+<!-- CARD 3: Rachel Sterling -->
+<article class="bg-white rounded-2xl border border-[#EEF1ED] p-4 shadow-[0_2px_8px_rgba(30,42,46,0.04)] hover:shadow-[0_4px_12px_rgba(30,42,46,0.06)] transition-all">
+<!-- Card Top Bar: Avatar + Patient name -->
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-[#D1E8DF] flex items-center justify-center text-[#154539] font-semibold text-sm">
+              RS
+            </div>
+<div>
+<div class="flex items-center gap-1.5">
+<h3 class="font-['Inter'] font-semibold text-sm text-[#1E2A2E] leading-tight">Rachel Sterling</h3>
+<span class="px-1.5 py-0.2 rounded-full bg-[#EEF1ED] text-[#4A5854] text-[10px] font-medium">BlueCross PPO</span>
+</div>
+<p class="text-[11px] text-[#4A5854] mt-0.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-[#4A5854]">schedule</span>
+<span>Requested 5 hrs ago</span>
+</p>
+</div>
+</div>
+<!-- Status Badge -->
+<span class="px-2.5 py-1 rounded-full bg-[#FBEFD9] text-[#9A5B10] text-[11px] font-medium tracking-tight whitespace-nowrap border border-[#F4DCB7]">
+            Intake Pending
+          </span>
+</div>
+<!-- Appointment Time & Modality Badges -->
+<div class="bg-[#FBFBF8] rounded-xl p-2.5 border border-[#EEF1ED] mb-3 space-y-1.5">
+<div class="flex items-center text-xs text-[#1E2A2E] font-medium gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#2F5D50]">calendar_month</span>
+<span>Tuesday, Oct 29 • 04:00 PM – 04:50 PM</span>
+</div>
+<div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-white border border-[#EEF1ED] text-[11px] font-medium text-[#1E2A2E]">
+<span class="material-symbols-outlined text-[13px] text-[#2F5D50]">videocam</span>
+<span>Telehealth (Video Call)</span>
+</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#EEF1ED] text-[11px] font-medium text-[#4A5854]">
+<span class="material-symbols-outlined text-[13px] text-[#2F5D50]">self_improvement</span>
+<span>Post-Partum Mood Support</span>
+</span>
+</div>
+</div>
+<!-- Action CTAs -->
+<div class="flex items-center gap-2 pt-1 border-t border-[#EEF1ED]">
+<button class="flex-1 h-9 rounded-xl border border-[#C84B4B]/40 text-[#C84B4B] hover:bg-[#FCE8E8] hover:border-[#C84B4B] text-xs font-semibold flex items-center justify-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px]">close</span>
+<span>Decline</span>
+</button>
+<button class="flex-1 h-9 rounded-xl bg-[#2F5D50] hover:bg-[#154539] text-white text-xs font-semibold flex items-center justify-center gap-1 shadow-sm transition-colors">
+<span class="material-symbols-outlined text-[16px]">check</span>
+<span>Accept Session</span>
+</button>
+</div>
+</article>
+<!-- VISUAL PREVIEW & QUICK SWITCHER SECTION (Tab Previews) -->
+<section class="mt-6 pt-3 border-t border-[#EEF1ED]">
+<div class="flex items-center justify-between mb-2.5 px-1">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-[#2F5D50]">visibility</span>
+<h4 class="font-['Newsreader',serif] text-base font-medium text-[#1E2A2E]">Other Tab Previews</h4>
+</div>
+<span class="text-[11px] text-[#4A5854]">Reference states</span>
+</div>
+<div class="space-y-2.5">
+<!-- Upcoming Tab Preview Card -->
+<div class="bg-white rounded-xl border border-[#EEF1ED] p-3 shadow-sm hover:border-[#2F5D50]/30 transition-colors">
+<div class="flex items-center justify-between text-[11px] mb-1">
+<span class="font-semibold text-[#2F5D50] flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#2F5D50]"></span>
+                Upcoming Tab Preview
+              </span>
+<span class="text-[#4A5854]">Confirmed</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<h5 class="font-semibold text-xs text-[#1E2A2E]">Marcus Sterling</h5>
+<p class="text-[11px] text-[#4A5854]">Today 11:30 AM • Anxiety &amp; Stress Management</p>
+</div>
+<div class="relative group">
+<button aria-label="More session options" class="w-7 h-7 rounded-lg hover:bg-[#EEF1ED] flex items-center justify-center text-[#4A5854]">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Completed Tab Preview Card -->
+<div class="bg-white rounded-xl border border-[#EEF1ED] p-3 shadow-sm hover:border-[#2F5D50]/30 transition-colors cursor-pointer group">
+<div class="flex items-center justify-between text-[11px] mb-1">
+<span class="font-semibold text-[#4A5854] flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#4A5854]"></span>
+                Completed Tab Preview
+              </span>
+<span class="text-[#2F5D50] font-medium flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[13px]">assignment_turned_in</span>
+                SOAP Note Filed
+              </span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<h5 class="font-semibold text-xs text-[#1E2A2E] group-hover:text-[#2F5D50] transition-colors">Elena Vance</h5>
+<p class="text-[11px] text-[#4A5854]">Today 09:00 AM • CBT Session 4 (In-Person)</p>
+</div>
+<span class="material-symbols-outlined text-[20px] text-[#4A5854] group-hover:translate-x-0.5 transition-transform">chevron_right</span>
+</div>
+</div>
+<!-- Cancelled Tab Preview Card -->
+<div class="bg-[#F4F4F1]/60 rounded-xl border border-[#EEF1ED] p-3 opacity-80">
+<div class="flex items-center justify-between text-[11px] mb-1">
+<span class="font-semibold text-[#C84B4B] flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#C84B4B]"></span>
+                Cancelled Tab Preview
+              </span>
+<span class="px-1.5 py-0.2 rounded bg-[#FCE8E8] text-[#C84B4B] text-[10px] font-semibold">Late Notice</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<h5 class="font-semibold text-xs text-[#4A5854] line-through">Arthur Pendelton</h5>
+<p class="text-[11px] text-[#717975]">Oct 22 • Patient Cancelled due to conflict</p>
+</div>
+<span class="text-[11px] text-[#717975] italic">No fee charged</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Spacer to clear persistent navigation -->
+<div class="h-6"></div>
+</main>
+<!-- IMMUTABLE SHARED BOTTOM NAVIGATION BAR -->
+<div class="sticky bottom-0 z-40 bg-[#f9fbfa] border-t border-[#ebefee] shadow-[0_-4px_12px_rgba(0,0,0,0.03)]">
+<div class="flex gap-2 bg-[#f9fbfa] px-4 pb-3 pt-2">
+<a class="just flex flex-1 flex-col items-center justify-end gap-1 text-[#648279]" href="#">
+<div class="text-[#648279] flex h-8 items-center justify-center" data-icon="House" data-size="24px" data-weight="regular">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M218.83,103.77l-80-75.48a1.14,1.14,0,0,1-.11-.11,16,16,0,0,0-21.53,0l-.11.11L37.17,103.77A16,16,0,0,0,32,115.55V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V160h32v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V115.55A16,16,0,0,0,218.83,103.77ZM208,208H160V160a16,16,0,0,0-16-16H112a16,16,0,0,0-16,16v48H48V115.55l.11-.1L128,40l79.9,75.43.11.1Z"></path>
+</svg>
+</div>
+<p class="text-[#648279] text-xs font-medium leading-normal tracking-[0.015em]">Overview</p>
+</a>
+<a class="just flex flex-1 flex-col items-center justify-end gap-1 rounded-full text-[#121716]" href="#">
+<div class="text-[#121716] flex h-8 items-center justify-center" data-icon="CalendarCheck" data-size="24px" data-weight="fill">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM169.66,133.66l-48,48a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L116,164.69l42.34-42.35a8,8,0,0,1,11.32,11.32ZM48,80V48H72v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Zm-96-88v64a8,8,0,0,1-16,0V132.94l-4.42,2.22a8,8,0,0,1-7.16-14.32l16-8A8,8,0,0,1,112,120Zm59.16,30.45L152,176h16a8,8,0,0,1,0,16H136a8,8,0,0,1-6.4-12.8l28.78-38.37A8,8,0,1,0,145.07,132a8,8,0,1,1-13.85-8A24,24,0,0,1,176,136,23.76,23.76,0,0,1,171.16,150.45Z"></path>
+</svg>
+</div>
+<p class="text-[#121716] text-xs font-medium leading-normal tracking-[0.015em]">Schedule</p>
+</a>
+<a class="just flex flex-1 flex-col items-center justify-end gap-1 text-[#648279]" href="#">
+<div class="text-[#648279] flex h-8 items-center justify-center" data-icon="Users" data-size="24px" data-weight="regular">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M117.25,157.92a60,60,0,1,0-66.5,0A95.83,95.83,0,0,0,3.53,195.63a8,8,0,1,0,13.4,8.74,80,80,0,0,1,134.14,0,8,8,0,0,0,13.4-8.74A95.83,95.83,0,0,0,117.25,157.92ZM40,108a44,44,0,1,1,44,44A44.05,44.05,0,0,1,40,108Zm210.14,98.7a8,8,0,0,1-11.07-2.33A79.83,79.83,0,0,0,172,168a8,8,0,0,1,0-16,44,44,0,1,0-16.34-84.87,8,8,0,1,1-5.94-14.85,60,60,0,0,1,55.53,105.64,95.83,95.83,0,0,1,47.22,37.71A8,8,0,0,1,250.14,206.7Z"></path>
+</svg>
+</div>
+<p class="text-[#648279] text-xs font-medium leading-normal tracking-[0.015em]">Patients</p>
+</a>
+<a class="just flex flex-1 flex-col items-center justify-end gap-1 text-[#648279]" href="#">
+<div class="text-[#648279] flex h-8 items-center justify-center" data-icon="UserCircle" data-size="24px" data-weight="regular">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM74.08,197.5a64,64,0,0,1,107.84,0,87.83,87.83,0,0,1-107.84,0ZM96,120a32,32,0,1,1,32,32A32,32,0,0,1,96,120Zm97.76,66.41a79.66,79.66,0,0,0-36.06-28.75,48,48,0,1,0-59.4,0,79.66,79.66,0,0,0-36.06,28.75,88,88,0,1,1,131.52,0Z"></path>
+</svg>
+</div>
+<p class="text-[#648279] text-xs font-medium leading-normal tracking-[0.015em]">Profile</p>
+</a>
+</div>
+</div>
+</div>
+<!-- Interactive Feedback Toast (Light micro-interaction) -->
+<script>
+    document.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const text = btn.innerText.trim();
+        if (text.includes('Accept Session') || text.includes('Accept')) {
+          const card = btn.closest('article');
+          if (card) {
+            card.style.transform = 'scale(0.98)';
+            card.style.opacity = '0.7';
+            setTimeout(() => {
+              card.style.transition = 'all 0.35s ease';
+              card.style.height = '0px';
+              card.style.margin = '0px';
+              card.style.padding = '0px';
+              card.style.overflow = 'hidden';
+              card.style.opacity = '0';
+            }, 250);
+          }
+        }
+      });
+    });
+  </script>
+</body></html>

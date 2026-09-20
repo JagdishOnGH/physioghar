@@ -1,0 +1,365 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '../../core/theme/app_theme.dart';
+import '../../core/widgets/shared_widgets.dart';
+import '../../core/constants/enums.dart';
+import '../../data/models/models.dart';
+import '../../providers/providers.dart';
+
+class ScheduleScreen extends ConsumerStatefulWidget {
+  const ScheduleScreen({super.key});
+
+  @override
+  ConsumerState<ScheduleScreen> createState() => _ScheduleScreenState();
+}
+
+class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
+  final List<String> days = ['Today', 'Tomorrow', 'Oct 26', 'Oct 27'];
+
+  void _showAddSlotSheet(BuildContext context) {
+    final timeController = TextEditingController();
+    String selectedDay = ref.read(scheduleProvider).selectedDay;
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => StatefulBuilder(
+        builder: (context, setSheetState) => BottomSheetWrapper(
+          title: 'Add New Slot',
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Select Target Day',
+                style: GoogleFonts.inter(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.textSecondary,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Wrap(
+                spacing: 8,
+                children: days.map((day) {
+                  final isSelected = selectedDay == day;
+                  return ChoiceChip(
+                    label: Text(day),
+                    selected: isSelected,
+                    selectedColor: AppColors.primary,
+                    labelStyle: GoogleFonts.inter(
+                      fontSize: 13,
+                      color: isSelected ? Colors.white : AppColors.textPrimary,
+                    ),
+                    onSelected: (val) {
+                      if (val) {
+                        setSheetState(() => selectedDay = day);
+                      }
+                    },
+                  );
+                }).toList(),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Time Range (e.g. 04:30 PM - 05:30 PM)',
+                style: GoogleFonts.inter(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.textSecondary,
+                ),
+              ),
+              const SizedBox(height: 8),
+              TextField(
+                controller: timeController,
+                decoration: const InputDecoration(
+                  hintText: 'e.g. 05:00 PM - 06:00 PM',
+                  prefixIcon: Icon(Icons.access_time, color: AppColors.textMuted),
+                ),
+              ),
+              const SizedBox(height: 24),
+              PrimaryButton(
+                text: 'Create Slot',
+                onPressed: () {
+                  if (timeController.text.trim().isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Please enter a valid time range')),
+                    );
+                    return;
+                  }
+                  ref.read(scheduleProvider.notifier).addSlot(selectedDay, timeController.text.trim());
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Added new slot for $selectedDay')),
+                  );
+                },
+              ),
+              const SizedBox(height: 12),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _confirmSlotAction(BuildContext context, Slot slot) {
+    final isBlocked = slot.status == SlotStatus.blocked;
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => BottomSheetWrapper(
+        title: isBlocked ? 'Unblock Slot' : 'Block Slot',
+        child: Column(
+          children: [
+            Text(
+              isBlocked
+                  ? 'Are you sure you want to unblock this slot (${slot.timeRange})? Patients will be able to book this slot again.'
+                  : 'Are you sure you want to block this slot (${slot.timeRange})? No new patients can book during this time.',
+              style: GoogleFonts.inter(fontSize: 14, color: AppColors.textSecondary),
+            ),
+            const SizedBox(height: 24),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () => Navigator.pop(context),
+                    style: OutlinedButton.styleFrom(
+                      shape: const StadiumBorder(),
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                    ),
+                    child: Text('Cancel', style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (isBlocked) {
+                        ref.read(scheduleProvider.notifier).unblockSlot(slot.id);
+                      } else {
+                        ref.read(scheduleProvider.notifier).blockSlot(slot.id);
+                      }
+                      Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            isBlocked ? 'Slot unblocked successfully' : 'Slot blocked successfully',
+                          ),
+                        ),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: isBlocked ? AppColors.primary : AppColors.error,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: const StadiumBorder(),
+                    ),
+                    child: Text(
+                      isBlocked ? 'Unblock' : 'Block Slot',
+                      style: GoogleFonts.inter(fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final scheduleState = ref.watch(scheduleProvider);
+    final selectedDay = scheduleState.selectedDay;
+    final daySlots = scheduleState.slots.where((s) => s.dayName == selectedDay).toList();
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Schedule & Availability',
+          style: GoogleFonts.fraunces(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add_alarm, color: AppColors.primary),
+            onPressed: () => _showAddSlotSheet(context),
+          ),
+          const SizedBox(width: 8),
+        ],
+      ),
+      body: Column(
+        children: [
+          Container(
+            color: Colors.white,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: days.map((day) {
+                  final isSelected = selectedDay == day;
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: ChoiceChip(
+                      label: Text(day),
+                      selected: isSelected,
+                      selectedColor: AppColors.primary,
+                      backgroundColor: AppColors.bgNeutral,
+                      labelStyle: GoogleFonts.inter(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: isSelected ? Colors.white : AppColors.textPrimary,
+                      ),
+                      onSelected: (val) {
+                        if (val) {
+                          ref.read(scheduleProvider.notifier).setSelectedDay(day);
+                        }
+                      },
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+          ),
+          const Divider(height: 1, color: Color(0xFFE8ECE9)),
+          Expanded(
+            child: daySlots.isEmpty
+                ? const EmptyState(
+                    icon: Icons.free_breakfast,
+                    title: 'No Slots for Selected Day',
+                    message: 'Tap the + icon above to create new consultation time slots.',
+                  )
+                : ListView.builder(
+                    padding: const EdgeInsets.all(16),
+                    itemCount: daySlots.length,
+                    itemBuilder: (context, index) {
+                      final slot = daySlots[index];
+                      return Card(
+                        margin: const EdgeInsets.only(bottom: 12),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Row(
+                            children: [
+                              _buildSlotShapeIcon(slot.status),
+                              const SizedBox(width: 14),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      slot.timeRange,
+                                      style: GoogleFonts.inter(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600,
+                                        color: AppColors.textPrimary,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    if (slot.status == SlotStatus.booked && slot.patientName != null)
+                                      Row(
+                                        children: [
+                                          CircleAvatar(
+                                            radius: 10,
+                                            backgroundImage: slot.patientAvatar != null
+                                                ? NetworkImage(slot.patientAvatar!)
+                                                : null,
+                                          ),
+                                          const SizedBox(width: 6),
+                                          Text(
+                                            slot.patientName!,
+                                            style: GoogleFonts.inter(
+                                              fontSize: 13,
+                                              color: AppColors.textSecondary,
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    else
+                                      Text(
+                                        slot.status == SlotStatus.open
+                                            ? 'Available for booking'
+                                            : 'Blocked by therapist',
+                                        style: GoogleFonts.inter(
+                                          fontSize: 12,
+                                          color: AppColors.textMuted,
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                              ),
+                              StatusPill.fromSlotStatus(slot.status),
+                              if (slot.status != SlotStatus.booked) ...[
+                                const SizedBox(width: 8),
+                                IconButton(
+                                  icon: Icon(
+                                    slot.status == SlotStatus.blocked
+                                        ? Icons.lock_open
+                                        : Icons.block,
+                                    size: 20,
+                                    color: slot.status == SlotStatus.blocked
+                                        ? AppColors.primary
+                                        : AppColors.textMuted,
+                                  ),
+                                  onPressed: () => _confirmSlotAction(context, slot),
+                                ),
+                              ],
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => _showAddSlotSheet(context),
+        backgroundColor: AppColors.primary,
+        icon: const Icon(Icons.add, color: Colors.white),
+        label: Text(
+          'Add Slot',
+          style: GoogleFonts.inter(fontWeight: FontWeight.w600, color: Colors.white),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSlotShapeIcon(SlotStatus status) {
+    switch (status) {
+      case SlotStatus.open:
+        return Container(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+            color: const Color(0xFFE2F0EA),
+            shape: BoxShape.circle,
+            border: Border.all(color: AppColors.primary, width: 2),
+          ),
+          child: const Icon(Icons.check, size: 20, color: AppColors.primary),
+        );
+      case SlotStatus.booked:
+        return Container(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+            color: AppColors.accentPale,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: AppColors.accent, width: 2),
+          ),
+          child: const Icon(Icons.event, size: 20, color: AppColors.accent),
+        );
+      case SlotStatus.blocked:
+        return Container(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+            color: const Color(0xFFF2ECE8),
+            borderRadius: BorderRadius.circular(4),
+            border: Border.all(color: const Color(0xFF7A6B63), width: 2),
+          ),
+          child: const Icon(Icons.block, size: 20, color: Color(0xFF7A6B63)),
+        );
+    }
+  }
+}

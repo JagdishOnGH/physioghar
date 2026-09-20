@@ -1,0 +1,281 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '../../core/theme/app_theme.dart';
+import '../../core/widgets/shared_widgets.dart';
+import '../../core/constants/enums.dart';
+import '../../data/models/models.dart';
+import '../../providers/providers.dart';
+import '../patients/patient_detail_screen.dart';
+
+class BookingsScreen extends ConsumerStatefulWidget {
+  const BookingsScreen({super.key});
+
+  @override
+  ConsumerState<BookingsScreen> createState() => _BookingsScreenState();
+}
+
+class _BookingsScreenState extends ConsumerState<BookingsScreen> with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 4, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  void _showDeclineConfirmation(BuildContext context, SessionBooking session) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => BottomSheetWrapper(
+        title: 'Decline Booking Request',
+        child: Column(
+          children: [
+            Text(
+              'Are you sure you want to decline the session request for ${session.patientName} on ${session.dateString} (${session.timeString})?',
+              style: GoogleFonts.inter(fontSize: 14, color: AppColors.textSecondary),
+            ),
+            const SizedBox(height: 24),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () => Navigator.pop(context),
+                    style: OutlinedButton.styleFrom(
+                      shape: const StadiumBorder(),
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                    ),
+                    child: Text('Cancel', style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      ref.read(bookingProvider.notifier).declineRequest(session.id);
+                      Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Declined request from ${session.patientName}')),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.error,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: const StadiumBorder(),
+                    ),
+                    child: Text('Decline Request', style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showRescheduleSheet(BuildContext context, SessionBooking session) {
+    final dateCtrl = TextEditingController(text: session.dateString);
+    final timeCtrl = TextEditingController(text: session.timeString);
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => BottomSheetWrapper(
+        title: 'Reschedule Session',
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Date', style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600)),
+            const SizedBox(height: 6),
+            TextField(
+              controller: dateCtrl,
+              decoration: const InputDecoration(prefixIcon: Icon(Icons.calendar_today, size: 18)),
+            ),
+            const SizedBox(height: 14),
+            Text('Time', style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600)),
+            const SizedBox(height: 6),
+            TextField(
+              controller: timeCtrl,
+              decoration: const InputDecoration(prefixIcon: Icon(Icons.access_time, size: 18)),
+            ),
+            const SizedBox(height: 20),
+            PrimaryButton(
+              text: 'Confirm Reschedule',
+              onPressed: () {
+                ref.read(bookingProvider.notifier).rescheduleSession(
+                      session.id,
+                      dateCtrl.text.trim(),
+                      timeCtrl.text.trim(),
+                    );
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Rescheduled session for ${session.patientName}')),
+                );
+              },
+            ),
+            const SizedBox(height: 12),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final bookings = ref.watch(bookingProvider);
+
+    final requestsList = bookings.where((b) => b.status == RequestStatus.pending).toList();
+    final upcomingList = bookings.where((b) => b.status == RequestStatus.accepted && !b.isCompleted).toList();
+    final completedList = bookings.where((b) => b.isCompleted).toList();
+    final cancelledList = bookings.where((b) => b.status == RequestStatus.declined).toList();
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Booking Requests & Sessions',
+          style: GoogleFonts.fraunces(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        bottom: TabBar(
+          controller: _tabController,
+          labelColor: AppColors.primary,
+          unselectedLabelColor: AppColors.textMuted,
+          indicatorColor: AppColors.primary,
+          indicatorWeight: 3,
+          labelStyle: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600),
+          tabs: [
+            Tab(text: 'Requests (${requestsList.length})'),
+            Tab(text: 'Upcoming (${upcomingList.length})'),
+            Tab(text: 'Completed (${completedList.length})'),
+            Tab(text: 'Cancelled (${cancelledList.length})'),
+          ],
+        ),
+      ),
+      body: TabBarView(
+        controller: _tabController,
+        children: [
+          _buildSessionListView(
+            items: requestsList,
+            emptyTitle: 'No Pending Booking Requests',
+            emptyMessage: 'New patient intake requests will appear here when submitted.',
+            buildActions: (session) => [
+              OutlinedButton(
+                onPressed: () => _showDeclineConfirmation(context, session),
+                style: OutlinedButton.styleFrom(
+                  side: const BorderSide(color: AppColors.error),
+                  shape: const StadiumBorder(),
+                ),
+                child: Text('Decline', style: GoogleFonts.inter(fontSize: 12, color: AppColors.error, fontWeight: FontWeight.w600)),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  ref.read(bookingProvider.notifier).acceptRequest(session.id);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Accepted request for ${session.patientName}')),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary,
+                  foregroundColor: Colors.white,
+                  shape: const StadiumBorder(),
+                ),
+                child: Text('Accept', style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600)),
+              ),
+            ],
+          ),
+          _buildSessionListView(
+            items: upcomingList,
+            emptyTitle: 'No Upcoming Sessions',
+            emptyMessage: 'You currently have no scheduled upcoming sessions.',
+            buildActions: (session) => [
+              OutlinedButton(
+                onPressed: () => _showRescheduleSheet(context, session),
+                style: OutlinedButton.styleFrom(
+                  side: const BorderSide(color: AppColors.secondary),
+                  shape: const StadiumBorder(),
+                ),
+                child: Text('Reschedule', style: GoogleFonts.inter(fontSize: 12, color: AppColors.secondary, fontWeight: FontWeight.w600)),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  ref.read(bookingProvider.notifier).completeSession(session.id);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Session completed for ${session.patientName}')),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary,
+                  foregroundColor: Colors.white,
+                  shape: const StadiumBorder(),
+                ),
+                child: Text('Complete', style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600)),
+              ),
+            ],
+          ),
+          _buildSessionListView(
+            items: completedList,
+            emptyTitle: 'No Completed Sessions',
+            emptyMessage: 'Completed clinical sessions will be listed here.',
+            buildActions: null,
+          ),
+          _buildSessionListView(
+            items: cancelledList,
+            emptyTitle: 'No Cancelled Sessions',
+            emptyMessage: 'Declined or cancelled session requests will be recorded here.',
+            buildActions: null,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSessionListView({
+    required List<SessionBooking> items,
+    required String emptyTitle,
+    required String emptyMessage,
+    required List<Widget>? Function(SessionBooking)? buildActions,
+  }) {
+    if (items.isEmpty) {
+      return EmptyState(
+        icon: Icons.calendar_today,
+        title: emptyTitle,
+        message: emptyMessage,
+      );
+    }
+    return ListView.builder(
+      padding: const EdgeInsets.all(16),
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        final session = items[index];
+        return SessionCard(
+          patientName: session.patientName,
+          patientAvatar: session.patientAvatar,
+          sessionType: session.sessionType,
+          dateString: session.dateString,
+          timeString: session.timeString,
+          complaint: session.chiefComplaint,
+          statusPill: StatusPill.fromRequestStatus(session.status, isCompleted: session.isCompleted),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => PatientDetailScreen(patientId: session.patientId),
+              ),
+            );
+          },
+          actionButtons: buildActions != null ? buildActions(session) : null,
+        );
+      },
+    );
+  }
+}

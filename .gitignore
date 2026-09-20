@@ -1,0 +1,24 @@
+# Flutter / Dart build outputs
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+build/
+
+# FVM Version Cache
+.fvm/
+
+# IDE files
+.idea/
+*.iml
+*.iws
+.vscode/
+
+# Symbol files
+*.pdb
+*.idb
+
+# OS files
+.DS_Store
+Thumbs.db
