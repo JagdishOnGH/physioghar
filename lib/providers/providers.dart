@@ -27,13 +27,15 @@ class ScheduleState {
   }
 }
 
-class ScheduleNotifier extends StateNotifier<ScheduleState> {
-  ScheduleNotifier()
-      : super(ScheduleState(
-          slots: MockData.initialSlots,
-          isAvailableForEmergency: true,
-          selectedDay: 'Today',
-        ));
+class ScheduleNotifier extends Notifier<ScheduleState> {
+  @override
+  ScheduleState build() {
+    return ScheduleState(
+      slots: MockData.initialSlots,
+      isAvailableForEmergency: true,
+      selectedDay: 'Today',
+    );
+  }
 
   void toggleAvailability() {
     state = state.copyWith(isAvailableForEmergency: !state.isAvailableForEmergency);
@@ -76,53 +78,85 @@ class ScheduleNotifier extends StateNotifier<ScheduleState> {
   }
 }
 
-final scheduleProvider = StateNotifierProvider<ScheduleNotifier, ScheduleState>((ref) {
-  return ScheduleNotifier();
-});
+final scheduleProvider = NotifierProvider<ScheduleNotifier, ScheduleState>(ScheduleNotifier.new);
 
-class BookingNotifier extends StateNotifier<List<SessionBooking>> {
-  BookingNotifier() : super(MockData.initialSessions);
+class BookingState {
+  final List<SessionBooking> sessions;
 
-  void acceptRequest(String requestId) {
-    state = state.map((session) {
-      if (session.id == requestId) {
-        return session.copyWith(status: RequestStatus.accepted);
-      }
-      return session;
-    }).toList();
-  }
+  BookingState({required this.sessions});
 
-  void declineRequest(String requestId) {
-    state = state.map((session) {
-      if (session.id == requestId) {
-        return session.copyWith(status: RequestStatus.declined);
-      }
-      return session;
-    }).toList();
-  }
+  List<SessionBooking> get requests =>
+      sessions.where((b) => b.status == RequestStatus.pending).toList();
 
-  void completeSession(String sessionId) {
-    state = state.map((session) {
-      if (session.id == sessionId) {
-        return session.copyWith(isCompleted: true);
-      }
-      return session;
-    }).toList();
-  }
+  List<SessionBooking> get todaysUpcoming =>
+      sessions.where((b) => b.dateString == 'Today' && b.status == RequestStatus.accepted && !b.isCompleted).toList();
 
-  void rescheduleSession(String sessionId, String newDate, String newTime) {
-    state = state.map((session) {
-      if (session.id == sessionId) {
-        return session.copyWith(dateString: newDate, timeString: newTime);
-      }
-      return session;
-    }).toList();
+  List<SessionBooking> get upcoming =>
+      sessions.where((b) => b.status == RequestStatus.accepted && !b.isCompleted).toList();
+
+  List<SessionBooking> get completed =>
+      sessions.where((b) => b.isCompleted).toList();
+
+  List<SessionBooking> get cancelled =>
+      sessions.where((b) => b.status == RequestStatus.declined).toList();
+
+  BookingState copyWith({List<SessionBooking>? sessions}) {
+    return BookingState(sessions: sessions ?? this.sessions);
   }
 }
 
-final bookingProvider = StateNotifierProvider<BookingNotifier, List<SessionBooking>>((ref) {
-  return BookingNotifier();
-});
+class BookingNotifier extends Notifier<BookingState> {
+  @override
+  BookingState build() {
+    return BookingState(sessions: MockData.initialSessions);
+  }
+
+  void acceptRequest(String requestId) {
+    state = state.copyWith(
+      sessions: state.sessions.map((session) {
+        if (session.id == requestId) {
+          return session.copyWith(status: RequestStatus.accepted);
+        }
+        return session;
+      }).toList(),
+    );
+  }
+
+  void declineRequest(String requestId) {
+    state = state.copyWith(
+      sessions: state.sessions.map((session) {
+        if (session.id == requestId) {
+          return session.copyWith(status: RequestStatus.declined);
+        }
+        return session;
+      }).toList(),
+    );
+  }
+
+  void completeSession(String sessionId) {
+    state = state.copyWith(
+      sessions: state.sessions.map((session) {
+        if (session.id == sessionId) {
+          return session.copyWith(isCompleted: true);
+        }
+        return session;
+      }).toList(),
+    );
+  }
+
+  void rescheduleSession(String sessionId, String newDate, String newTime) {
+    state = state.copyWith(
+      sessions: state.sessions.map((session) {
+        if (session.id == sessionId) {
+          return session.copyWith(dateString: newDate, timeString: newTime);
+        }
+        return session;
+      }).toList(),
+    );
+  }
+}
+
+final bookingProvider = NotifierProvider<BookingNotifier, BookingState>(BookingNotifier.new);
 
 class PatientState {
   final List<Patient> patients;
@@ -148,13 +182,15 @@ class PatientState {
   }
 }
 
-class PatientNotifier extends StateNotifier<PatientState> {
-  PatientNotifier()
-      : super(PatientState(
-          patients: MockData.initialPatients,
-          notes: MockData.initialNotes,
-          searchQuery: '',
-        ));
+class PatientNotifier extends Notifier<PatientState> {
+  @override
+  PatientState build() {
+    return PatientState(
+      patients: MockData.initialPatients,
+      notes: MockData.initialNotes,
+      searchQuery: '',
+    );
+  }
 
   void setSearchQuery(String query) {
     state = state.copyWith(searchQuery: query);
@@ -184,12 +220,13 @@ class PatientNotifier extends StateNotifier<PatientState> {
   }
 }
 
-final patientProvider = StateNotifierProvider<PatientNotifier, PatientState>((ref) {
-  return PatientNotifier();
-});
+final patientProvider = NotifierProvider<PatientNotifier, PatientState>(PatientNotifier.new);
 
-class ProfileNotifier extends StateNotifier<TherapistProfile> {
-  ProfileNotifier() : super(MockData.initialProfile);
+class ProfileNotifier extends Notifier<TherapistProfile> {
+  @override
+  TherapistProfile build() {
+    return MockData.initialProfile;
+  }
 
   void updateProfile({
     required String name,
@@ -212,14 +249,15 @@ class ProfileNotifier extends StateNotifier<TherapistProfile> {
   }
 }
 
-final profileProvider = StateNotifierProvider<ProfileNotifier, TherapistProfile>((ref) {
-  return ProfileNotifier();
-});
+final profileProvider = NotifierProvider<ProfileNotifier, TherapistProfile>(ProfileNotifier.new);
 
 enum AppLocale { en, ne }
 
-class LocaleNotifier extends StateNotifier<AppLocale> {
-  LocaleNotifier() : super(AppLocale.en);
+class LocaleNotifier extends Notifier<AppLocale> {
+  @override
+  AppLocale build() {
+    return AppLocale.en;
+  }
 
   void toggleLocale() {
     state = state == AppLocale.en ? AppLocale.ne : AppLocale.en;
@@ -244,6 +282,4 @@ class LocaleNotifier extends StateNotifier<AppLocale> {
   }
 }
 
-final localeProvider = StateNotifierProvider<LocaleNotifier, AppLocale>((ref) {
-  return LocaleNotifier();
-});
+final localeProvider = NotifierProvider<LocaleNotifier, AppLocale>(LocaleNotifier.new);

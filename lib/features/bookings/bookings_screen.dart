@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/widgets/shared_widgets.dart';
-import '../../core/constants/enums.dart';
 import '../../data/models/models.dart';
 import '../../providers/providers.dart';
 import '../patients/patient_detail_screen.dart';
@@ -133,12 +132,12 @@ class _BookingsScreenState extends ConsumerState<BookingsScreen> with SingleTick
 
   @override
   Widget build(BuildContext context) {
-    final bookings = ref.watch(bookingProvider);
+    final bookingState = ref.watch(bookingProvider);
 
-    final requestsList = bookings.where((b) => b.status == RequestStatus.pending).toList();
-    final upcomingList = bookings.where((b) => b.status == RequestStatus.accepted && !b.isCompleted).toList();
-    final completedList = bookings.where((b) => b.isCompleted).toList();
-    final cancelledList = bookings.where((b) => b.status == RequestStatus.declined).toList();
+    final requestsList = bookingState.requests;
+    final upcomingList = bookingState.upcoming;
+    final completedList = bookingState.completed;
+    final cancelledList = bookingState.cancelled;
 
     return Scaffold(
       appBar: AppBar(

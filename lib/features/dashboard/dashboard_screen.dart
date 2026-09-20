@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/widgets/shared_widgets.dart';
-import '../../core/constants/enums.dart';
 import '../../providers/providers.dart';
 import '../account/profile_screen.dart';
 import '../patients/patient_detail_screen.dart';
@@ -16,15 +15,13 @@ class DashboardScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isAvailable = ref.watch(scheduleProvider.select((s) => s.isAvailableForEmergency));
+    final todaySessions = ref.watch(bookingProvider.select((b) => b.todaysUpcoming));
+    final requestCount = ref.watch(bookingProvider.select((b) => b.requests.length));
+    final completedCount = ref.watch(bookingProvider.select((b) => b.completed.length));
+    final activePatientsCount = ref.watch(patientProvider.select((p) => p.patients.length));
     final profile = ref.watch(profileProvider);
-    final scheduleState = ref.watch(scheduleProvider);
-    final bookings = ref.watch(bookingProvider);
-    final patientsState = ref.watch(patientProvider);
     final localeNotifier = ref.read(localeProvider.notifier);
-
-    final todaySessions = bookings.where((b) => b.dateString == 'Today' && b.status == RequestStatus.accepted).toList();
-    final pendingRequests = bookings.where((b) => b.status == RequestStatus.pending).toList();
-    final completedSessions = bookings.where((b) => b.isCompleted).toList();
 
     final dateFormatted = DateFormat('EEEE, MMM d').format(DateTime.now());
 
@@ -142,9 +139,7 @@ class DashboardScreen extends ConsumerWidget {
                       duration: const Duration(milliseconds: 250),
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                       decoration: BoxDecoration(
-                        color: scheduleState.isAvailableForEmergency
-                            ? AppColors.primary
-                            : AppColors.bgNeutral,
+                        color: isAvailable ? AppColors.primary : AppColors.bgNeutral,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Row(
@@ -154,23 +149,19 @@ class DashboardScreen extends ConsumerWidget {
                             width: 8,
                             height: 8,
                             decoration: BoxDecoration(
-                              color: scheduleState.isAvailableForEmergency
-                                  ? AppColors.accent
-                                  : AppColors.textMuted,
+                              color: isAvailable ? AppColors.accent : AppColors.textMuted,
                               shape: BoxShape.circle,
                             ),
                           ),
                           const SizedBox(width: 6),
                           Text(
-                            scheduleState.isAvailableForEmergency
+                            isAvailable
                                 ? localeNotifier.translate('available')
                                 : localeNotifier.translate('busy'),
                             style: GoogleFonts.inter(
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
-                              color: scheduleState.isAvailableForEmergency
-                                  ? Colors.white
-                                  : AppColors.textSecondary,
+                              color: isAvailable ? Colors.white : AppColors.textSecondary,
                             ),
                           ),
                         ],
@@ -200,7 +191,7 @@ class DashboardScreen extends ConsumerWidget {
                   _buildSummaryCard(
                     context,
                     title: 'Intake Requests',
-                    value: '${pendingRequests.length}',
+                    value: '$requestCount',
                     badgeText: 'NEW',
                     icon: Icons.person_add_outlined,
                     iconBg: AppColors.accentPale,
@@ -211,7 +202,7 @@ class DashboardScreen extends ConsumerWidget {
                   _buildSummaryCard(
                     context,
                     title: 'Completed (Wk)',
-                    value: '${completedSessions.length}',
+                    value: '$completedCount',
                     badgeText: 'WK',
                     icon: Icons.task_alt,
                     iconBg: AppColors.bgNeutral,
@@ -222,7 +213,7 @@ class DashboardScreen extends ConsumerWidget {
                   _buildSummaryCard(
                     context,
                     title: 'Active Patients',
-                    value: '${patientsState.patients.length}',
+                    value: '$activePatientsCount',
                     badgeText: 'TOTAL',
                     icon: Icons.people_outline,
                     iconBg: const Color(0xFFE4EFF2),
