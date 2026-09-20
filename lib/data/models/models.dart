@@ -135,6 +135,7 @@ class SessionBooking {
   final String chiefComplaint;
   final RequestStatus status;
   final bool isCompleted;
+  final String? remarks;
 
   SessionBooking({
     required this.id,
@@ -147,7 +148,24 @@ class SessionBooking {
     required this.chiefComplaint,
     required this.status,
     this.isCompleted = false,
+    this.remarks,
   });
+
+  SessionBooking toUpcoming() {
+    return copyWith(status: RequestStatus.accepted, isCompleted: false);
+  }
+
+  SessionBooking toCancelled() {
+    return copyWith(status: RequestStatus.declined, isCompleted: false);
+  }
+
+  SessionBooking toCompleted({String? remarksText}) {
+    return copyWith(
+      status: RequestStatus.accepted,
+      isCompleted: true,
+      remarks: remarksText ?? remarks,
+    );
+  }
 
   SessionBooking copyWith({
     String? id,
@@ -160,6 +178,7 @@ class SessionBooking {
     String? chiefComplaint,
     RequestStatus? status,
     bool? isCompleted,
+    String? remarks,
   }) {
     return SessionBooking(
       id: id ?? this.id,
@@ -172,6 +191,7 @@ class SessionBooking {
       chiefComplaint: chiefComplaint ?? this.chiefComplaint,
       status: status ?? this.status,
       isCompleted: isCompleted ?? this.isCompleted,
+      remarks: remarks ?? this.remarks,
     );
   }
 }

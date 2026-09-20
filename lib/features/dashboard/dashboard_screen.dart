@@ -279,7 +279,7 @@ class DashboardScreen extends ConsumerWidget {
                       : [
                           OutlinedButton(
                             onPressed: () {
-                              ref.read(bookingProvider.notifier).completeSession(session.id);
+                              ref.read(bookingProvider.notifier).markComplete(session.id);
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text('Session marked as completed for ${session.patientName}')),
                               );

@@ -58,7 +58,7 @@ class _BookingsScreenState extends ConsumerState<BookingsScreen> with SingleTick
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
-                      ref.read(bookingProvider.notifier).declineRequest(session.id);
+                      ref.read(bookingProvider.notifier).decline(session.id);
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('Declined request from ${session.patientName}')),
@@ -74,6 +74,59 @@ class _BookingsScreenState extends ConsumerState<BookingsScreen> with SingleTick
                   ),
                 ),
               ],
+            ),
+            const SizedBox(height: 12),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showMarkCompleteSheet(BuildContext context, SessionBooking session) {
+    final remarksCtrl = TextEditingController();
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => BottomSheetWrapper(
+        title: 'Complete Session & Add Remarks',
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Patient: ${session.patientName}',
+              style: GoogleFonts.fraunces(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              'Session: ${session.sessionType} • ${session.timeString}',
+              style: GoogleFonts.inter(fontSize: 12, color: AppColors.textSecondary),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Clinical Remarks / Summary (Optional)',
+              style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(height: 6),
+            TextField(
+              controller: remarksCtrl,
+              maxLines: 3,
+              decoration: const InputDecoration(
+                hintText: 'Enter session outcomes, patient progress, or follow-up notes...',
+              ),
+            ),
+            const SizedBox(height: 20),
+            PrimaryButton(
+              text: 'Mark Session Completed',
+              onPressed: () {
+                final text = remarksCtrl.text.trim();
+                ref.read(bookingProvider.notifier).markComplete(session.id, remarks: text.isEmpty ? null : text);
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Marked session completed for ${session.patientName}')),
+                );
+              },
             ),
             const SizedBox(height: 12),
           ],
@@ -112,7 +165,7 @@ class _BookingsScreenState extends ConsumerState<BookingsScreen> with SingleTick
             PrimaryButton(
               text: 'Confirm Reschedule',
               onPressed: () {
-                ref.read(bookingProvider.notifier).rescheduleSession(
+                ref.read(bookingProvider.notifier).reschedule(
                       session.id,
                       dateCtrl.text.trim(),
                       timeCtrl.text.trim(),
@@ -178,7 +231,7 @@ class _BookingsScreenState extends ConsumerState<BookingsScreen> with SingleTick
               ),
               ElevatedButton(
                 onPressed: () {
-                  ref.read(bookingProvider.notifier).acceptRequest(session.id);
+                  ref.read(bookingProvider.notifier).accept(session.id);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('Accepted request for ${session.patientName}')),
                   );
@@ -206,12 +259,7 @@ class _BookingsScreenState extends ConsumerState<BookingsScreen> with SingleTick
                 child: Text('Reschedule', style: GoogleFonts.inter(fontSize: 12, color: AppColors.secondary, fontWeight: FontWeight.w600)),
               ),
               ElevatedButton(
-                onPressed: () {
-                  ref.read(bookingProvider.notifier).completeSession(session.id);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Session completed for ${session.patientName}')),
-                  );
-                },
+                onPressed: () => _showMarkCompleteSheet(context, session),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
                   foregroundColor: Colors.white,
@@ -262,7 +310,7 @@ class _BookingsScreenState extends ConsumerState<BookingsScreen> with SingleTick
           sessionType: session.sessionType,
           dateString: session.dateString,
           timeString: session.timeString,
-          complaint: session.chiefComplaint,
+          complaint: session.remarks != null ? 'Remarks: ${session.remarks}' : session.chiefComplaint,
           statusPill: StatusPill.fromRequestStatus(session.status, isCompleted: session.isCompleted),
           onTap: () {
             Navigator.push(
