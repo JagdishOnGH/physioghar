@@ -417,15 +417,6 @@
       "norm_label": "main"
     },
     {
-      "label": "ProviderScope",
-      "file_type": "code",
-      "source_file": "lib/main.dart",
-      "source_location": null,
-      "id": "lib_main_providerscope",
-      "community": 3,
-      "norm_label": "providerscope"
-    },
-    {
       "label": "build",
       "file_type": "code",
       "source_file": "lib/main.dart",
@@ -435,13 +426,13 @@
       "norm_label": "build"
     },
     {
-      "label": "MaterialApp",
+      "label": "SafeArea",
       "file_type": "code",
       "source_file": "lib/main.dart",
       "source_location": null,
-      "id": "lib_main_materialapp",
+      "id": "lib_main_safearea",
       "community": 3,
-      "norm_label": "materialapp"
+      "norm_label": "safearea"
     },
     {
       "label": "_navigateToTab",
@@ -1749,6 +1740,15 @@
       "norm_label": "dispose"
     },
     {
+      "label": "_showErrorDialog",
+      "file_type": "code",
+      "source_file": "lib/features/bookings/bookings_screen.dart",
+      "source_location": null,
+      "id": "bookings_bookings_screen_showerrordialog",
+      "community": 4,
+      "norm_label": "_showerrordialog"
+    },
+    {
       "label": "_showDeclineConfirmation",
       "file_type": "code",
       "source_file": "lib/features/bookings/bookings_screen.dart",
@@ -2307,13 +2307,22 @@
       "norm_label": "patientdetailscreen"
     },
     {
-      "label": "_showAddOrEditNoteSheet",
+      "label": "_showErrorDialog",
       "file_type": "code",
       "source_file": "lib/features/patients/patient_detail_screen.dart",
       "source_location": null,
-      "id": "patients_patient_detail_screen_showaddoreditnotesheet",
+      "id": "patients_patient_detail_screen_showerrordialog",
       "community": 8,
-      "norm_label": "_showaddoreditnotesheet"
+      "norm_label": "_showerrordialog"
+    },
+    {
+      "label": "_showAddOrEditNoteDialog",
+      "file_type": "code",
+      "source_file": "lib/features/patients/patient_detail_screen.dart",
+      "source_location": null,
+      "id": "patients_patient_detail_screen_showaddoreditnotedialog",
+      "community": 8,
+      "norm_label": "_showaddoreditnotedialog"
     },
     {
       "label": "SizedBox",
@@ -2323,15 +2332,6 @@
       "id": "patients_patient_detail_screen_sizedbox",
       "community": 8,
       "norm_label": "sizedbox"
-    },
-    {
-      "label": "SnackBar",
-      "file_type": "code",
-      "source_file": "lib/features/patients/patient_detail_screen.dart",
-      "source_location": null,
-      "id": "patients_patient_detail_screen_snackbar",
-      "community": 8,
-      "norm_label": "snackbar"
     },
     {
       "label": "build",
@@ -2640,6 +2640,15 @@
       "norm_label": "_schedulescreenstate"
     },
     {
+      "label": "_showErrorDialog",
+      "file_type": "code",
+      "source_file": "lib/features/schedule/schedule_screen.dart",
+      "source_location": null,
+      "id": "schedule_schedule_screen_showerrordialog",
+      "community": 2,
+      "norm_label": "_showerrordialog"
+    },
+    {
       "label": "_showAddSlotSheet",
       "file_type": "code",
       "source_file": "lib/features/schedule/schedule_screen.dart",
@@ -2665,15 +2674,6 @@
       "id": "schedule_schedule_screen_choicechip",
       "community": 2,
       "norm_label": "choicechip"
-    },
-    {
-      "label": "SnackBar",
-      "file_type": "code",
-      "source_file": "lib/features/schedule/schedule_screen.dart",
-      "source_location": null,
-      "id": "schedule_schedule_screen_snackbar",
-      "community": 2,
-      "norm_label": "snackbar"
     },
     {
       "label": "_showSlotActionSheet",
@@ -4340,6 +4340,51 @@
       "norm_label": "launch screen assets"
     },
     {
+      "label": "ProviderScope",
+      "file_type": "code",
+      "source_file": "lib/main.dart",
+      "source_location": null,
+      "community": 3,
+      "norm_label": "providerscope",
+      "id": "lib_main_providerscope"
+    },
+    {
+      "label": "MaterialApp",
+      "file_type": "code",
+      "source_file": "lib/main.dart",
+      "source_location": null,
+      "community": 3,
+      "norm_label": "materialapp",
+      "id": "lib_main_materialapp"
+    },
+    {
+      "label": "_showAddOrEditNoteSheet",
+      "file_type": "code",
+      "source_file": "lib/features/patients/patient_detail_screen.dart",
+      "source_location": null,
+      "community": 8,
+      "norm_label": "_showaddoreditnotesheet",
+      "id": "patients_patient_detail_screen_showaddoreditnotesheet"
+    },
+    {
+      "label": "SnackBar",
+      "file_type": "code",
+      "source_file": "lib/features/patients/patient_detail_screen.dart",
+      "source_location": null,
+      "community": 8,
+      "norm_label": "snackbar",
+      "id": "patients_patient_detail_screen_snackbar"
+    },
+    {
+      "label": "SnackBar",
+      "file_type": "code",
+      "source_file": "lib/features/schedule/schedule_screen.dart",
+      "source_location": null,
+      "community": 2,
+      "norm_label": "snackbar",
+      "id": "schedule_schedule_screen_snackbar"
+    },
+    {
       "label": "package:flutter_riverpod/flutter_riverpod.dart",
       "file_type": "code",
       "source_file": "lib/features/account/account_screen.dart",
@@ -4852,6 +4897,16 @@
       "weight": 1.0,
       "source": "lib_main_dart",
       "target": "lib_main_providerscope"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/main.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_main_dart",
+      "target": "lib_main_safearea"
     },
     {
       "relation": "defines",
@@ -6151,6 +6206,16 @@
       "source_location": null,
       "weight": 1.0,
       "source": "lib_features_bookings_bookings_screen_dart",
+      "target": "bookings_bookings_screen_showerrordialog"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/features/bookings/bookings_screen.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_features_bookings_bookings_screen_dart",
       "target": "bookings_bookings_screen_showmarkcompletesheet"
     },
     {
@@ -6831,7 +6896,27 @@
       "source_location": null,
       "weight": 1.0,
       "source": "lib_features_patients_patient_detail_screen_dart",
+      "target": "patients_patient_detail_screen_showaddoreditnotedialog"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/features/patients/patient_detail_screen.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_features_patients_patient_detail_screen_dart",
       "target": "patients_patient_detail_screen_showaddoreditnotesheet"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/features/patients/patient_detail_screen.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_features_patients_patient_detail_screen_dart",
+      "target": "patients_patient_detail_screen_showerrordialog"
     },
     {
       "relation": "defines",
@@ -7192,6 +7277,16 @@
       "weight": 1.0,
       "source": "lib_features_schedule_schedule_screen_dart",
       "target": "schedule_schedule_screen_showaddslotsheet"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/features/schedule/schedule_screen.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_features_schedule_schedule_screen_dart",
+      "target": "schedule_schedule_screen_showerrordialog"
     },
     {
       "relation": "defines",
@@ -9028,5 +9123,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "ad72e450cd9ac88b1502d416730ee6d54a21d6c7"
+  "built_at_commit": "cd08bfda265375adf8629a5eafc835948ee087da"
 }

@@ -29,6 +29,31 @@ class _BookingsScreenState extends ConsumerState<BookingsScreen> with SingleTick
     super.dispose();
   }
 
+  void _showErrorDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        title: Text(
+          'Validation Error',
+          style: GoogleFonts.fraunces(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.error),
+        ),
+        content: Text(message, style: GoogleFonts.inter(fontSize: 14)),
+        actions: [
+          ElevatedButton(
+            onPressed: () => Navigator.pop(ctx),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primary,
+              foregroundColor: Colors.white,
+              shape: const StadiumBorder(),
+            ),
+            child: Text('OK', style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
+          ),
+        ],
+      ),
+    );
+  }
+
   void _showDeclineConfirmation(BuildContext context, SessionBooking session) {
     showModalBottomSheet(
       context: context,
@@ -165,10 +190,17 @@ class _BookingsScreenState extends ConsumerState<BookingsScreen> with SingleTick
             PrimaryButton(
               text: 'Confirm Reschedule',
               onPressed: () {
+                final date = dateCtrl.text.trim();
+                final time = timeCtrl.text.trim();
+                if (date.isEmpty || time.isEmpty) {
+                  _showErrorDialog(context, 'Date and Time cannot be empty.');
+                  return;
+                }
+
                 ref.read(bookingProvider.notifier).reschedule(
                       session.id,
-                      dateCtrl.text.trim(),
-                      timeCtrl.text.trim(),
+                      date,
+                      time,
                     );
                 Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(

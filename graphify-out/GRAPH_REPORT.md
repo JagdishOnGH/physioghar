@@ -1,16 +1,16 @@
 # Graph Report - physioghar  (2026-09-21)
 
 ## Corpus Check
-- 61 files · ~59,100 words
+- 61 files · ~60,108 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 482 nodes · 462 edges · 45 communities (36 shown, 9 thin omitted)
+- 487 nodes · 467 edges · 45 communities (36 shown, 9 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 8 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `ad72e450`
+- Built from commit: `cd08bfda`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -91,15 +91,15 @@ Nodes (22): RegisterPlugins(), OnCreate(), Create(), Destroy(), EnableFullDpiSup
 
 ### Community 2 - "Community 2"
 Cohesion: 0.08
-Nodes (23): ../../core/constants/enums.dart, ../../core/theme/app_theme.dart, ../../core/widgets/shared_widgets.dart, ../../data/models/models.dart, package:flutter/material.dart, package:flutter_riverpod/flutter_riverpod.dart, package:google_fonts/google_fonts.dart, ../../providers/providers.dart (+15 more)
+Nodes (24): ../../core/constants/enums.dart, ../../core/theme/app_theme.dart, ../../core/widgets/shared_widgets.dart, ../../data/models/models.dart, package:flutter/material.dart, package:flutter_riverpod/flutter_riverpod.dart, package:google_fonts/google_fonts.dart, ../../providers/providers.dart (+16 more)
 
 ### Community 3 - "Community 3"
-Cohesion: 0.09
-Nodes (22): features/account/account_screen.dart, features/bookings/bookings_screen.dart, features/dashboard/dashboard_screen.dart, features/patients/patient_list_screen.dart, features/schedule/schedule_screen.dart, AccountScreen, BookingsScreen, build (+14 more)
+Cohesion: 0.08
+Nodes (23): features/account/account_screen.dart, features/bookings/bookings_screen.dart, features/dashboard/dashboard_screen.dart, features/patients/patient_list_screen.dart, features/schedule/schedule_screen.dart, AccountScreen, BookingsScreen, build (+15 more)
 
 ### Community 4 - "Community 4"
 Cohesion: 0.09
-Nodes (21): BookingsScreen, _BookingsScreenState, build, _buildSessionListView, dispose, EmptyState, initState, Scaffold (+13 more)
+Nodes (22): BookingsScreen, _BookingsScreenState, build, _buildSessionListView, dispose, EmptyState, initState, Scaffold (+14 more)
 
 ### Community 5 - "Community 5"
 Cohesion: 0.09
@@ -114,8 +114,8 @@ Cohesion: 0.10
 Nodes (20): build, _buildFieldLabel, _buildFormView, _buildSuccessView, ComplaintsScreen, _ComplaintsScreenState, Container, dispose (+12 more)
 
 ### Community 8 - "Community 8"
-Cohesion: 0.10
-Nodes (19): ../../core/theme/app_theme.dart, ../../core/widgets/shared_widgets.dart, ../../data/models/models.dart, package:flutter/material.dart, package:flutter_riverpod/flutter_riverpod.dart, package:google_fonts/google_fonts.dart, package:intl/intl.dart, ../../providers/providers.dart (+11 more)
+Cohesion: 0.09
+Nodes (21): ../../core/theme/app_theme.dart, ../../core/widgets/shared_widgets.dart, ../../data/models/models.dart, package:flutter/material.dart, package:flutter_riverpod/flutter_riverpod.dart, package:google_fonts/google_fonts.dart, package:intl/intl.dart, ../../providers/providers.dart (+13 more)
 
 ### Community 9 - "Community 9"
 Cohesion: 0.09
@@ -202,7 +202,7 @@ Cohesion: 0.50
 Nodes (3): ../../core/constants/enums.dart, MockData, ../models/models.dart
 
 ## Knowledge Gaps
-- **350 isolated node(s):** `MainActivity`, `flutter_export_environment.sh script`, `SBFrame`, `SBDebugger`, `-registerWithRegistry` (+345 more)
+- **355 isolated node(s):** `MainActivity`, `flutter_export_environment.sh script`, `SBFrame`, `SBDebugger`, `-registerWithRegistry` (+350 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **9 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -212,14 +212,14 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `OnCreate()` connect `Community 1` to `Community 16`?**
   _High betweenness centrality (0.002) - this node is a cross-community bridge._
 - **What connects `MainActivity`, `flutter_export_environment.sh script`, `SBFrame` to the rest of the system?**
-  _351 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _356 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.06060606060606061 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.1032258064516129 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
-  _Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08 - nodes in this community are weakly interconnected._
 - **Should `Community 3` be split into smaller, more focused modules?**
-  _Cohesion score 0.08695652173913043 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected._
 - **Should `Community 4` be split into smaller, more focused modules?**
-  _Cohesion score 0.09090909090909091 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08695652173913043 - nodes in this community are weakly interconnected._

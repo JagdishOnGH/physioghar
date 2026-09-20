@@ -18,6 +18,31 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
   final List<String> days = ['Today', 'Tomorrow', 'Oct 26', 'Oct 27'];
   String _selectedDay = 'Today';
 
+  void _showErrorDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        title: Text(
+          'Validation Error',
+          style: GoogleFonts.fraunces(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.error),
+        ),
+        content: Text(message, style: GoogleFonts.inter(fontSize: 14)),
+        actions: [
+          ElevatedButton(
+            onPressed: () => Navigator.pop(ctx),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primary,
+              foregroundColor: Colors.white,
+              shape: const StadiumBorder(),
+            ),
+            child: Text('OK', style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
+          ),
+        ],
+      ),
+    );
+  }
+
   void _showAddSlotSheet(BuildContext context) {
     final timeController = TextEditingController();
     String targetDay = _selectedDay;
@@ -83,9 +108,7 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                 text: 'Create Slot',
                 onPressed: () {
                   if (timeController.text.trim().isEmpty) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Please enter a valid time range')),
-                    );
+                    _showErrorDialog(context, 'Please enter a valid time range.');
                     return;
                   }
                   ref.read(scheduleProvider.notifier).addSlot(targetDay, timeController.text.trim());

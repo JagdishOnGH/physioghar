@@ -9,11 +9,7 @@ import 'features/patients/patient_list_screen.dart';
 import 'features/account/account_screen.dart';
 
 void main() {
-  runApp(
-    const ProviderScope(
-      child: PhysioGharApp(),
-    ),
-  );
+  runApp(const ProviderScope(child: PhysioGharApp()));
 }
 
 class PhysioGharApp extends StatelessWidget {
@@ -21,11 +17,18 @@ class PhysioGharApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'PhysioGhar Therapist',
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
-      home: const MainShellScreen(),
+    return SafeArea(
+      bottom: true,
+      //other false
+      top: false,
+      left: false,
+      right: false,
+      child: MaterialApp(
+        title: 'PhysioGhar Therapist',
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.lightTheme,
+        home: const MainShellScreen(),
+      ),
     );
   }
 }
@@ -57,19 +60,21 @@ class _MainShellScreenState extends State<MainShellScreen> {
     ];
 
     return Scaffold(
-      body: IndexedStack(
-        index: _currentIndex,
-        children: screens,
-      ),
+      body: IndexedStack(index: _currentIndex, children: screens),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 60),
         child: FloatingActionButton.small(
-          onPressed: () => ScreenLauncher.showCatalog(context, onSelectTab: _navigateToTab),
+          onPressed: () =>
+              ScreenLauncher.showCatalog(context, onSelectTab: _navigateToTab),
           backgroundColor: AppColors.accent,
           elevation: 4,
           tooltip: 'Browse All 10 Screens',
-          child: const Icon(Icons.grid_view_rounded, color: Colors.white, size: 20),
+          child: const Icon(
+            Icons.grid_view_rounded,
+            color: Colors.white,
+            size: 20,
+          ),
         ),
       ),
       bottomNavigationBar: Container(

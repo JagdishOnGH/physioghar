@@ -12,78 +12,143 @@ class PatientDetailScreen extends ConsumerWidget {
 
   const PatientDetailScreen({super.key, required this.patientId});
 
-  void _showAddOrEditNoteSheet(BuildContext context, WidgetRef ref, {PatientNote? noteToEdit}) {
+  void _showErrorDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        title: Text(
+          'Validation Error',
+          style: GoogleFonts.fraunces(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.error),
+        ),
+        content: Text(
+          message,
+          style: GoogleFonts.inter(fontSize: 14, color: AppColors.textPrimary),
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: () => Navigator.pop(ctx),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primary,
+              foregroundColor: Colors.white,
+              shape: const StadiumBorder(),
+            ),
+            child: Text('OK', style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showAddOrEditNoteDialog(BuildContext context, WidgetRef ref, {PatientNote? noteToEdit}) {
     final titleCtrl = TextEditingController(text: noteToEdit?.title ?? '');
     final tagCtrl = TextEditingController(text: noteToEdit?.tag ?? 'Clinical Note');
     final contentCtrl = TextEditingController(text: noteToEdit?.content ?? '');
 
     final isEditing = noteToEdit != null;
 
-    showModalBottomSheet(
+    showDialog(
       context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (ctx) => BottomSheetWrapper(
-        title: isEditing ? 'Edit Clinical Note' : 'Add Clinical Note',
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Note Title', style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600)),
-            const SizedBox(height: 6),
-            TextField(
-              controller: titleCtrl,
-              decoration: const InputDecoration(hintText: 'e.g. Progress Review — Week 5'),
-            ),
-            const SizedBox(height: 14),
-            Text('Tag / Category', style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600)),
-            const SizedBox(height: 6),
-            TextField(
-              controller: tagCtrl,
-              decoration: const InputDecoration(hintText: 'e.g. Rehab Milestone, Progress, Evaluation'),
-            ),
-            const SizedBox(height: 14),
-            Text('Note Content', style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600)),
-            const SizedBox(height: 6),
-            TextField(
-              controller: contentCtrl,
-              maxLines: 4,
-              decoration: const InputDecoration(hintText: 'Enter clinical observations, exercises, or progress details...'),
-            ),
-            const SizedBox(height: 20),
-            PrimaryButton(
-              text: isEditing ? 'Save Changes' : 'Add Note',
-              onPressed: () {
-                if (titleCtrl.text.trim().isEmpty || contentCtrl.text.trim().isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Title and Content cannot be empty')),
-                  );
-                  return;
-                }
+      builder: (ctx) => Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        backgroundColor: Colors.white,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    isEditing ? 'Edit Clinical Note' : 'Add Clinical Note',
+                    style: GoogleFonts.fraunces(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.close, size: 20, color: AppColors.textMuted),
+                    onPressed: () => Navigator.pop(ctx),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              Text('Note Title', style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600)),
+              const SizedBox(height: 6),
+              TextField(
+                controller: titleCtrl,
+                decoration: const InputDecoration(hintText: 'e.g. Progress Review — Week 5'),
+              ),
+              const SizedBox(height: 14),
+              Text('Tag / Category', style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600)),
+              const SizedBox(height: 6),
+              TextField(
+                controller: tagCtrl,
+                decoration: const InputDecoration(hintText: 'e.g. Rehab Milestone, Progress, Evaluation'),
+              ),
+              const SizedBox(height: 14),
+              Text('Note Content', style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600)),
+              const SizedBox(height: 6),
+              TextField(
+                controller: contentCtrl,
+                maxLines: 4,
+                decoration: const InputDecoration(hintText: 'Enter clinical observations, exercises, or progress details...'),
+              ),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () => Navigator.pop(ctx),
+                      style: OutlinedButton.styleFrom(
+                        shape: const StadiumBorder(),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                      ),
+                      child: Text('Cancel', style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        final title = titleCtrl.text.trim();
+                        final content = contentCtrl.text.trim();
 
-                if (isEditing) {
-                  ref.read(patientProvider.notifier).updateNote(
-                        noteToEdit.id,
-                        titleCtrl.text.trim(),
-                        contentCtrl.text.trim(),
-                        tagCtrl.text.trim(),
-                      );
-                } else {
-                  ref.read(patientProvider.notifier).addNote(
-                        patientId,
-                        titleCtrl.text.trim(),
-                        contentCtrl.text.trim(),
-                        tagCtrl.text.trim(),
-                      );
-                }
+                        if (title.isEmpty || content.isEmpty) {
+                          _showErrorDialog(context, 'Title and Content cannot be empty.');
+                          return;
+                        }
 
-                Navigator.pop(context);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(isEditing ? 'Note updated successfully' : 'Note added successfully')),
-                );
-              },
-            ),
-            const SizedBox(height: 12),
-          ],
+                        if (isEditing) {
+                          ref.read(patientProvider.notifier).updateNote(
+                                noteToEdit.id,
+                                title,
+                                content,
+                                tagCtrl.text.trim(),
+                              );
+                        } else {
+                          ref.read(patientProvider.notifier).addNote(
+                                patientId,
+                                title,
+                                content,
+                                tagCtrl.text.trim(),
+                              );
+                        }
+
+                        Navigator.pop(ctx);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primary,
+                        foregroundColor: Colors.white,
+                        shape: const StadiumBorder(),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                      ),
+                      child: Text(isEditing ? 'Save Changes' : 'Add Note', style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -207,7 +272,7 @@ class PatientDetailScreen extends ConsumerWidget {
                   ),
                 ),
                 ElevatedButton.icon(
-                  onPressed: () => _showAddOrEditNoteSheet(context, ref),
+                  onPressed: () => _showAddOrEditNoteDialog(context, ref),
                   icon: const Icon(Icons.add, size: 16, color: Colors.white),
                   label: Text('Add Note', style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600)),
                   style: ElevatedButton.styleFrom(
@@ -263,7 +328,7 @@ class PatientDetailScreen extends ConsumerWidget {
                                 ),
                                 IconButton(
                                   icon: const Icon(Icons.edit, size: 16, color: AppColors.textMuted),
-                                  onPressed: () => _showAddOrEditNoteSheet(context, ref, noteToEdit: note),
+                                  onPressed: () => _showAddOrEditNoteDialog(context, ref, noteToEdit: note),
                                 ),
                               ],
                             ),
