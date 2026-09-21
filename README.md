@@ -183,9 +183,28 @@ State is managed strictly using **Riverpod** with `NotifierProvider` and `Notifi
 
 ---
 
-## Future Improvements (With More Time)
+## Future Improvements & Architectural Roadmap
 
-1. **Backend Integration**: Implement REST or GraphQL API integration with OAuth2 / JWT authentication.
-2. **Persistent Storage**: Implement local persistence using Hive or SQLite for offline support.
-3. **Real-time Synchronization**: Use WebSockets / SSE for live booking notifications.
-4. **Push Notifications**: Integrate Firebase Cloud Messaging (FCM) for session reminders.
+### 1. Declarative Routing (`go_router` & Code Generator)
+- **Type-Safe Navigation**: Replace basic imperative `Navigator.push` calls with [`go_router`](https://pub.dev/packages/go_router) and `go_router_builder` code generation.
+- **Deep Linking & Web Support**: Enable URL-driven navigation, route guards for authentication, and state-preserving tab navigation shell routes.
+
+### 2. Clean Architecture Layer Segregation
+For enterprise scalability, the codebase can be refactored into a strict 3-tier Clean Architecture:
+- **Data Layer**: Contains API clients, Data Sources (Remote & Local Database via Hive/Isar), Data Transfer Objects (DTOs), and Repository Implementations. Responsible for converting raw JSON or DB rows into Domain Entities.
+- **Domain Layer**: The core business logic layer. Contains pure Dart **Entities**, **Use Cases / Interactors** (e.g., `AcceptBookingUseCase`, `AddPatientNoteUseCase`), and abstract **Repository Interfaces**. Free of any Flutter or UI dependencies.
+- **Presentation Layer**: UI Widgets, Screen Pages (`lib/features/[feat]/pages/`), and Riverpod `StateNotifierProvider` state managers. Consumes Use Cases and exposes immutable UI state to reactive Flutter components.
+
+### 3. Localization & Language Support (English & Nepali)
+- **ARB Translation Source**: Localized strings are stored in standard ARB format inside `lib/l10n/`:
+  - [`lib/l10n/app_en.arb`](file:///g:/flatter_project/physioghar/lib/l10n/app_en.arb) — English strings template.
+  - [`lib/l10n/app_ne.arb`](file:///g:/flatter_project/physioghar/lib/l10n/app_ne.arb) — Nepali translations.
+- **Where to Expect Translated Text**: Selecting **Nepali** or **English** in the **Language Settings** screen (`lib/features/account/pages/language_page.dart`) dynamically updates:
+  - Account & Settings menu labels (`Account Settings`, `Therapist Profile`, `Language Settings`, `Report an Issue`, `Log Out`).
+  - Screen page headers, selection options, and interactive action feedback toasts.
+- **Code Access**: Strings are accessed in UI widgets via generated `AppLocalizations.of(context)!.keyName`.
+
+### 4. Backend Integration & Real-Time Sync
+- **REST / GraphQL APIs**: OAuth2 / JWT user authentication and backend database integration.
+- **Real-Time WebSockets**: Live incoming booking request alerts and instant patient messaging.
+- **Push Notifications**: Firebase Cloud Messaging (FCM) integration for session reminders.
