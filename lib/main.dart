@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'l10n/app_localizations.dart';
 import 'core/theme/app_theme.dart';
 import 'core/widgets/screen_launcher.dart';
 import 'features/pages/pages.dart';
-
+import 'providers/providers.dart';
 
 void main() {
   runApp(const ProviderScope(child: PhysioGharApp()));
 }
 
-class PhysioGharApp extends StatelessWidget {
+class PhysioGharApp extends ConsumerWidget {
   const PhysioGharApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final appLocale = ref.watch(localeProvider);
+
     return SafeArea(
       bottom: true,
-      //other false
       top: false,
       left: false,
       right: false,
@@ -24,6 +27,9 @@ class PhysioGharApp extends StatelessWidget {
         title: 'PhysioGhar Therapist',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
+        locale: Locale(appLocale == AppLocale.en ? 'en' : 'ne'),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: const MainShellScreen(),
       ),
     );
@@ -58,22 +64,6 @@ class _MainShellScreenState extends State<MainShellScreen> {
 
     return Scaffold(
       body: IndexedStack(index: _currentIndex, children: screens),
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 60),
-        child: FloatingActionButton.small(
-          onPressed: () =>
-              ScreenLauncher.showCatalog(context, onSelectTab: _navigateToTab),
-          backgroundColor: AppColors.accent,
-          elevation: 4,
-          tooltip: 'Browse All 10 Screens',
-          child: const Icon(
-            Icons.grid_view_rounded,
-            color: Colors.white,
-            size: 20,
-          ),
-        ),
-      ),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
           boxShadow: [

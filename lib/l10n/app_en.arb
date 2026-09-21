@@ -1,0 +1,16 @@
+{
+  "@@locale": "en",
+  "accountSettings": "Account Settings",
+  "therapistProfile": "Therapist Profile",
+  "viewAndEditProfile": "View & edit clinical profile",
+  "languageSettings": "Language / भाषा",
+  "selectAppLanguage": "Select app language",
+  "reportAnIssue": "Report an Issue",
+  "submitSupportTicket": "Submit a support ticket",
+  "appVersion": "App Version",
+  "logOut": "Log Out",
+  "selectLanguage": "Select Language",
+  "english": "English",
+  "nepali": "Nepali (नेपाली)",
+  "languageUpdated": "Language updated to English"
+}

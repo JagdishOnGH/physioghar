@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:google_fonts/google_fonts.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/screen_launcher.dart';
 import '../../pages.dart';
@@ -8,10 +10,11 @@ class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
 
   void _showLogoutDialog(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: Text('Log Out', style: GoogleFonts.fraunces(fontWeight: FontWeight.bold)),
+        title: Text(l10n.logOut, style: GoogleFonts.fraunces(fontWeight: FontWeight.bold)),
         content: Text('Are you sure you want to log out of your therapist session?', style: GoogleFonts.inter(fontSize: 14)),
         actions: [
           TextButton(
@@ -29,7 +32,7 @@ class AccountScreen extends StatelessWidget {
               backgroundColor: AppColors.error,
               foregroundColor: Colors.white,
             ),
-            child: Text('Log Out', style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
+            child: Text(l10n.logOut, style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
           ),
         ],
       ),
@@ -38,10 +41,11 @@ class AccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Account & Settings',
+          l10n.accountSettings,
           style: GoogleFonts.fraunces(fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),
@@ -121,8 +125,8 @@ class AccountScreen extends StatelessWidget {
               items: [
                 _MenuItem(
                   icon: Icons.person_outline,
-                  title: 'View Therapist Profile',
-                  subtitle: 'Public qualifications, bio, and clinic info',
+                  title: l10n.therapistProfile,
+                  subtitle: l10n.viewAndEditProfile,
                   onTap: () {
                     Navigator.push(
                       context,
@@ -150,8 +154,8 @@ class AccountScreen extends StatelessWidget {
               items: [
                 _MenuItem(
                   icon: Icons.language,
-                  title: 'Language Settings',
-                  subtitle: 'Switch application locale (English / Nepali)',
+                  title: l10n.languageSettings,
+                  subtitle: l10n.selectAppLanguage,
                   onTap: () {
                     Navigator.push(
                       context,
@@ -161,8 +165,8 @@ class AccountScreen extends StatelessWidget {
                 ),
                 _MenuItem(
                   icon: Icons.report_problem_outlined,
-                  title: 'Report an Issue / Support',
-                  subtitle: 'Submit tickets or feedback to PhysioGhar team',
+                  title: l10n.reportAnIssue,
+                  subtitle: l10n.submitSupportTicket,
                   onTap: () {
                     Navigator.push(
                       context,
@@ -179,7 +183,7 @@ class AccountScreen extends StatelessWidget {
               items: [
                 _MenuItem(
                   icon: Icons.logout,
-                  title: 'Log Out',
+                  title: l10n.logOut,
                   subtitle: 'End therapist session',
                   onTap: () => _showLogoutDialog(context),
                 ),

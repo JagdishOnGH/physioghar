@@ -1,0 +1,16 @@
+{
+  "@@locale": "ne",
+  "accountSettings": "खाता सेटिङहरू",
+  "therapistProfile": "थेरापिस्ट प्रोफाइल",
+  "viewAndEditProfile": "प्रोफाइल हेर्नुहोस् र सम्पादन गर्नुहोस्",
+  "languageSettings": "भाषा सेटिङहरू",
+  "selectAppLanguage": "एपको भाषा छान्नुहोस्",
+  "reportAnIssue": "समस्या दर्ता",
+  "submitSupportTicket": "सहयोग टिकट पठाउनुहोस्",
+  "appVersion": "एप संस्करण",
+  "logOut": "लग आउट",
+  "selectLanguage": "भाषा छान्नुहोस्",
+  "english": "English (अंग्रेजी)",
+  "nepali": "नेपाली",
+  "languageUpdated": "भाषा नेपालीमा परिवर्तन भयो"
+}

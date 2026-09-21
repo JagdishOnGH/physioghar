@@ -507,6 +507,15 @@
       "norm_label": "package:flutter_riverpod/flutter_riverpod.dart"
     },
     {
+      "label": "l10n/app_localizations.dart",
+      "file_type": "code",
+      "source_file": "lib/main.dart",
+      "source_location": null,
+      "id": "lib_main_dart_l10n_app_localizations_dart",
+      "community": 3,
+      "norm_label": "l10n/app_localizations.dart"
+    },
+    {
       "label": "core/theme/app_theme.dart",
       "file_type": "code",
       "source_file": "lib/main.dart",
@@ -532,6 +541,15 @@
       "id": "lib_main_dart_features_pages_pages_dart",
       "community": 3,
       "norm_label": "features/pages/pages.dart"
+    },
+    {
+      "label": "providers/providers.dart",
+      "file_type": "code",
+      "source_file": "lib/main.dart",
+      "source_location": null,
+      "id": "lib_main_dart_providers_providers_dart",
+      "community": 3,
+      "norm_label": "providers/providers.dart"
     },
     {
       "label": "enums.dart",
@@ -1371,6 +1389,15 @@
       "norm_label": "package:google_fonts/google_fonts.dart"
     },
     {
+      "label": "../../../l10n/app_localizations.dart",
+      "file_type": "code",
+      "source_file": "lib/features/account/pages/account_page.dart",
+      "source_location": null,
+      "id": "lib_features_account_pages_account_page_dart_l10n_app_localizations_dart",
+      "community": 11,
+      "norm_label": "../../../l10n/app_localizations.dart"
+    },
+    {
       "label": "../../../core/theme/app_theme.dart",
       "file_type": "code",
       "source_file": "lib/features/account/pages/account_page.dart",
@@ -1605,15 +1632,6 @@
       "norm_label": "sizedbox"
     },
     {
-      "label": "SnackBar",
-      "file_type": "code",
-      "source_file": "lib/features/account/pages/language_page.dart",
-      "source_location": null,
-      "id": "pages_language_page_snackbar",
-      "community": 46,
-      "norm_label": "snackbar"
-    },
-    {
       "label": "Divider",
       "file_type": "code",
       "source_file": "lib/features/account/pages/language_page.dart",
@@ -1648,6 +1666,15 @@
       "id": "lib_features_account_pages_language_page_dart_package_google_fonts_google_fonts_dart",
       "community": 46,
       "norm_label": "package:google_fonts/google_fonts.dart"
+    },
+    {
+      "label": "../../../l10n/app_localizations.dart",
+      "file_type": "code",
+      "source_file": "lib/features/account/pages/language_page.dart",
+      "source_location": null,
+      "id": "lib_features_account_pages_language_page_dart_l10n_app_localizations_dart",
+      "community": 46,
+      "norm_label": "../../../l10n/app_localizations.dart"
     },
     {
       "label": "../../../core/theme/app_theme.dart",
@@ -2991,6 +3018,222 @@
       "norm_label": "../../../providers/providers.dart"
     },
     {
+      "label": "app_localizations.dart",
+      "file_type": "code",
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "id": "lib_l10n_app_localizations_dart",
+      "community": 63,
+      "norm_label": "app_localizations.dart"
+    },
+    {
+      "label": "AppLocalizations",
+      "file_type": "code",
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "id": "l10n_app_localizations_applocalizations",
+      "community": 63,
+      "norm_label": "applocalizations"
+    },
+    {
+      "label": "_AppLocalizationsDelegate",
+      "file_type": "code",
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "id": "l10n_app_localizations_applocalizationsdelegate",
+      "community": 63,
+      "norm_label": "_applocalizationsdelegate"
+    },
+    {
+      "label": "isSupported",
+      "file_type": "code",
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "id": "l10n_app_localizations_issupported",
+      "community": 63,
+      "norm_label": "issupported"
+    },
+    {
+      "label": "shouldReload",
+      "file_type": "code",
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "id": "l10n_app_localizations_shouldreload",
+      "community": 63,
+      "norm_label": "shouldreload"
+    },
+    {
+      "label": "lookupAppLocalizations",
+      "file_type": "code",
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "id": "l10n_app_localizations_lookupapplocalizations",
+      "community": 63,
+      "norm_label": "lookupapplocalizations"
+    },
+    {
+      "label": "AppLocalizationsEn",
+      "file_type": "code",
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "id": "l10n_app_localizations_applocalizationsen",
+      "community": 63,
+      "norm_label": "applocalizationsen"
+    },
+    {
+      "label": "AppLocalizationsNe",
+      "file_type": "code",
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "id": "l10n_app_localizations_applocalizationsne",
+      "community": 63,
+      "norm_label": "applocalizationsne"
+    },
+    {
+      "label": "FlutterError",
+      "file_type": "code",
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "id": "l10n_app_localizations_fluttererror",
+      "community": 63,
+      "norm_label": "fluttererror"
+    },
+    {
+      "label": "dart:async",
+      "file_type": "code",
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "id": "lib_l10n_app_localizations_dart_dart_async",
+      "community": 63,
+      "norm_label": "dart:async"
+    },
+    {
+      "label": "package:flutter/foundation.dart",
+      "file_type": "code",
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "id": "package_flutter_foundation_dart",
+      "community": 63,
+      "norm_label": "package:flutter/foundation.dart"
+    },
+    {
+      "label": "package:flutter/widgets.dart",
+      "file_type": "code",
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "id": "package_flutter_widgets_dart",
+      "community": 63,
+      "norm_label": "package:flutter/widgets.dart"
+    },
+    {
+      "label": "package:flutter_localizations/flutter_localizations.dart",
+      "file_type": "code",
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "id": "package_flutter_localizations_flutter_localizations_dart",
+      "community": 63,
+      "norm_label": "package:flutter_localizations/flutter_localizations.dart"
+    },
+    {
+      "label": "package:intl/intl.dart",
+      "file_type": "code",
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "id": "lib_l10n_app_localizations_dart_package_intl_intl_dart",
+      "community": 63,
+      "norm_label": "package:intl/intl.dart"
+    },
+    {
+      "label": "app_localizations_en.dart",
+      "file_type": "code",
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "id": "app_localizations_en_dart",
+      "community": 63,
+      "norm_label": "app_localizations_en.dart"
+    },
+    {
+      "label": "app_localizations_ne.dart",
+      "file_type": "code",
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "id": "app_localizations_ne_dart",
+      "community": 63,
+      "norm_label": "app_localizations_ne.dart"
+    },
+    {
+      "label": "app_localizations_en.dart",
+      "file_type": "code",
+      "source_file": "lib/l10n/app_localizations_en.dart",
+      "source_location": null,
+      "id": "lib_l10n_app_localizations_en_dart",
+      "community": 64,
+      "norm_label": "app_localizations_en.dart"
+    },
+    {
+      "label": "AppLocalizationsEn",
+      "file_type": "code",
+      "source_file": "lib/l10n/app_localizations_en.dart",
+      "source_location": null,
+      "id": "l10n_app_localizations_en_applocalizationsen",
+      "community": 64,
+      "norm_label": "applocalizationsen"
+    },
+    {
+      "label": "package:intl/intl.dart",
+      "file_type": "code",
+      "source_file": "lib/l10n/app_localizations_en.dart",
+      "source_location": null,
+      "id": "lib_l10n_app_localizations_en_dart_package_intl_intl_dart",
+      "community": 64,
+      "norm_label": "package:intl/intl.dart"
+    },
+    {
+      "label": "app_localizations.dart",
+      "file_type": "code",
+      "source_file": "lib/l10n/app_localizations_en.dart",
+      "source_location": null,
+      "id": "lib_l10n_app_localizations_en_dart_app_localizations_dart",
+      "community": 64,
+      "norm_label": "app_localizations.dart"
+    },
+    {
+      "label": "app_localizations_ne.dart",
+      "file_type": "code",
+      "source_file": "lib/l10n/app_localizations_ne.dart",
+      "source_location": null,
+      "id": "lib_l10n_app_localizations_ne_dart",
+      "community": 65,
+      "norm_label": "app_localizations_ne.dart"
+    },
+    {
+      "label": "AppLocalizationsNe",
+      "file_type": "code",
+      "source_file": "lib/l10n/app_localizations_ne.dart",
+      "source_location": null,
+      "id": "l10n_app_localizations_ne_applocalizationsne",
+      "community": 65,
+      "norm_label": "applocalizationsne"
+    },
+    {
+      "label": "package:intl/intl.dart",
+      "file_type": "code",
+      "source_file": "lib/l10n/app_localizations_ne.dart",
+      "source_location": null,
+      "id": "lib_l10n_app_localizations_ne_dart_package_intl_intl_dart",
+      "community": 65,
+      "norm_label": "package:intl/intl.dart"
+    },
+    {
+      "label": "app_localizations.dart",
+      "file_type": "code",
+      "source_file": "lib/l10n/app_localizations_ne.dart",
+      "source_location": null,
+      "id": "lib_l10n_app_localizations_ne_dart_app_localizations_dart",
+      "community": 65,
+      "norm_label": "app_localizations.dart"
+    },
+    {
       "label": "booking_provider.dart",
       "file_type": "code",
       "source_file": "lib/providers/booking_provider.dart",
@@ -3948,7 +4191,7 @@
       "file_type": "code",
       "source_file": "test/widget_test.dart",
       "source_location": null,
-      "id": "dart_async",
+      "id": "test_widget_test_dart_dart_async",
       "community": 13,
       "norm_label": "dart:async"
     },
@@ -4511,22 +4754,157 @@
       "norm_label": "readme.md"
     },
     {
-      "label": "physioghar",
+      "label": "PhysioGhar Therapist App",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L1",
-      "id": "physioghar_readme_physioghar",
+      "id": "physioghar_readme_physioghar_therapist_app",
       "community": 31,
-      "norm_label": "physioghar"
+      "norm_label": "physioghar therapist app"
     },
     {
-      "label": "Getting Started",
+      "label": "Technical Specifications & Environment",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L5",
-      "id": "physioghar_readme_getting_started",
+      "source_location": "L7",
+      "id": "physioghar_readme_technical_specifications_environment",
       "community": 31,
-      "norm_label": "getting started"
+      "norm_label": "technical specifications & environment"
+    },
+    {
+      "label": "App Features & 10 Screen Pages",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L17",
+      "id": "physioghar_readme_app_features_10_screen_pages",
+      "community": 31,
+      "norm_label": "app features & 10 screen pages"
+    },
+    {
+      "label": "Project Architecture & Folder Structure",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L38",
+      "id": "physioghar_readme_project_architecture_folder_structure",
+      "community": 31,
+      "norm_label": "project architecture & folder structure"
+    },
+    {
+      "label": "code:block1 (lib/)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L42",
+      "id": "physioghar_readme_codeblock_1",
+      "community": 31,
+      "norm_label": "code:block1 (lib/)"
+    },
+    {
+      "label": "State Management Rationale",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L106",
+      "id": "physioghar_readme_state_management_rationale",
+      "community": 31,
+      "norm_label": "state management rationale"
+    },
+    {
+      "label": "Design System & Styling Rules",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L116",
+      "id": "physioghar_readme_design_system_styling_rules",
+      "community": 31,
+      "norm_label": "design system & styling rules"
+    },
+    {
+      "label": "How to Run the Project",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L138",
+      "id": "physioghar_readme_how_to_run_the_project",
+      "community": 31,
+      "norm_label": "how to run the project"
+    },
+    {
+      "label": "Prerequisites",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L140",
+      "id": "physioghar_readme_prerequisites",
+      "community": 31,
+      "norm_label": "prerequisites"
+    },
+    {
+      "label": "Installation Steps",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L144",
+      "id": "physioghar_readme_installation_steps",
+      "community": 31,
+      "norm_label": "installation steps"
+    },
+    {
+      "label": "code:bash (git clone https://github.com/JagdishOnGH/physioghar.git)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L147",
+      "id": "physioghar_readme_codeblock_2",
+      "community": 31,
+      "norm_label": "code:bash (git clone https://github.com/jagdishongh/physioghar.git)"
+    },
+    {
+      "label": "code:bash (fvm install 3.38.5)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L153",
+      "id": "physioghar_readme_codeblock_3",
+      "community": 31,
+      "norm_label": "code:bash (fvm install 3.38.5)"
+    },
+    {
+      "label": "code:bash (fvm flutter pub get)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L159",
+      "id": "physioghar_readme_codeblock_4",
+      "community": 31,
+      "norm_label": "code:bash (fvm flutter pub get)"
+    },
+    {
+      "label": "code:bash (fvm flutter analyze)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L164",
+      "id": "physioghar_readme_codeblock_5",
+      "community": 31,
+      "norm_label": "code:bash (fvm flutter analyze)"
+    },
+    {
+      "label": "code:bash (fvm flutter run)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L169",
+      "id": "physioghar_readme_codeblock_6",
+      "community": 31,
+      "norm_label": "code:bash (fvm flutter run)"
+    },
+    {
+      "label": "Best Practices & Standard Development Hygiene",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L177",
+      "id": "physioghar_readme_best_practices_standard_development_hygiene",
+      "community": 31,
+      "norm_label": "best practices & standard development hygiene"
+    },
+    {
+      "label": "Future Improvements (With More Time)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L186",
+      "id": "physioghar_readme_future_improvements_with_more_time",
+      "community": 31,
+      "norm_label": "future improvements (with more time)"
     },
     {
       "label": "graphify.md",
@@ -4698,6 +5076,42 @@
       "id": "launchimage_imageset_readme_launch_screen_assets",
       "community": 34,
       "norm_label": "launch screen assets"
+    },
+    {
+      "label": "SnackBar",
+      "file_type": "code",
+      "source_file": "lib/features/account/pages/language_page.dart",
+      "source_location": null,
+      "community": 46,
+      "norm_label": "snackbar",
+      "id": "pages_language_page_snackbar"
+    },
+    {
+      "label": "dart:async",
+      "file_type": "code",
+      "source_file": "test/widget_test.dart",
+      "source_location": null,
+      "community": 13,
+      "norm_label": "dart:async",
+      "id": "dart_async"
+    },
+    {
+      "label": "physioghar",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "community": 31,
+      "norm_label": "physioghar",
+      "id": "physioghar_readme_physioghar"
+    },
+    {
+      "label": "Getting Started",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L5",
+      "community": 31,
+      "norm_label": "getting started",
+      "id": "physioghar_readme_getting_started"
     },
     {
       "label": "features/dashboard/dashboard_screen.dart",
@@ -5626,6 +6040,16 @@
       "source_location": null,
       "weight": 1.0,
       "source": "lib_main_dart",
+      "target": "lib_main_dart_l10n_app_localizations_dart"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/main.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_main_dart",
       "target": "lib_main_dart_package_flutter_material_dart"
     },
     {
@@ -5637,6 +6061,16 @@
       "weight": 1.0,
       "source": "lib_main_dart",
       "target": "lib_main_dart_package_flutter_riverpod_flutter_riverpod_dart"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/main.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_main_dart",
+      "target": "lib_main_dart_providers_providers_dart"
     },
     {
       "relation": "defines",
@@ -6566,6 +7000,16 @@
       "source_location": null,
       "weight": 1.0,
       "source": "lib_features_account_pages_account_page_dart",
+      "target": "lib_features_account_pages_account_page_dart_l10n_app_localizations_dart"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/features/account/pages/account_page.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_features_account_pages_account_page_dart",
       "target": "lib_features_account_pages_account_page_dart_package_flutter_material_dart"
     },
     {
@@ -6877,6 +7321,16 @@
       "weight": 1.0,
       "source": "lib_features_account_pages_language_page_dart",
       "target": "lib_features_account_pages_language_page_dart_core_theme_app_theme_dart"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/features/account/pages/language_page.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_features_account_pages_language_page_dart",
+      "target": "lib_features_account_pages_language_page_dart_l10n_app_localizations_dart"
     },
     {
       "relation": "imports",
@@ -8372,6 +8826,216 @@
       "relation": "imports",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_l10n_app_localizations_dart",
+      "target": "app_localizations_en_dart"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_l10n_app_localizations_dart",
+      "target": "app_localizations_ne_dart"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_l10n_app_localizations_dart",
+      "target": "l10n_app_localizations_applocalizations"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_l10n_app_localizations_dart",
+      "target": "l10n_app_localizations_applocalizationsdelegate"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_l10n_app_localizations_dart",
+      "target": "l10n_app_localizations_applocalizationsen"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_l10n_app_localizations_dart",
+      "target": "l10n_app_localizations_applocalizationsne"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_l10n_app_localizations_dart",
+      "target": "l10n_app_localizations_fluttererror"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_l10n_app_localizations_dart",
+      "target": "l10n_app_localizations_issupported"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_l10n_app_localizations_dart",
+      "target": "l10n_app_localizations_lookupapplocalizations"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_l10n_app_localizations_dart",
+      "target": "l10n_app_localizations_shouldreload"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_l10n_app_localizations_dart",
+      "target": "lib_l10n_app_localizations_dart_dart_async"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_l10n_app_localizations_dart",
+      "target": "lib_l10n_app_localizations_dart_package_intl_intl_dart"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_l10n_app_localizations_dart",
+      "target": "package_flutter_foundation_dart"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_l10n_app_localizations_dart",
+      "target": "package_flutter_localizations_flutter_localizations_dart"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/l10n/app_localizations.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_l10n_app_localizations_dart",
+      "target": "package_flutter_widgets_dart"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/l10n/app_localizations_en.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_l10n_app_localizations_en_dart",
+      "target": "l10n_app_localizations_en_applocalizationsen"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/l10n/app_localizations_en.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_l10n_app_localizations_en_dart",
+      "target": "lib_l10n_app_localizations_en_dart_app_localizations_dart"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/l10n/app_localizations_en.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_l10n_app_localizations_en_dart",
+      "target": "lib_l10n_app_localizations_en_dart_package_intl_intl_dart"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/l10n/app_localizations_ne.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_l10n_app_localizations_ne_dart",
+      "target": "l10n_app_localizations_ne_applocalizationsne"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/l10n/app_localizations_ne.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_l10n_app_localizations_ne_dart",
+      "target": "lib_l10n_app_localizations_ne_dart_app_localizations_dart"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/l10n/app_localizations_ne.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lib_l10n_app_localizations_ne_dart",
+      "target": "lib_l10n_app_localizations_ne_dart_package_intl_intl_dart"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "lib/providers/booking_provider.dart",
       "source_location": null,
       "weight": 1.0,
@@ -9594,6 +10258,16 @@
       "source_location": null,
       "weight": 1.0,
       "source": "test_widget_test_dart",
+      "target": "test_widget_test_dart_dart_async"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "test/widget_test.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "test_widget_test_dart",
       "target": "test_widget_test_dart_package_flutter_riverpod_flutter_riverpod_dart"
     },
     {
@@ -10495,11 +11169,171 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L5",
+      "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "physioghar_readme_physioghar",
-      "target": "physioghar_readme_getting_started"
+      "source": "readme_md",
+      "target": "physioghar_readme_physioghar_therapist_app",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "physioghar_readme_physioghar_therapist_app",
+      "target": "physioghar_readme_app_features_10_screen_pages",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L177",
+      "weight": 1.0,
+      "source": "physioghar_readme_physioghar_therapist_app",
+      "target": "physioghar_readme_best_practices_standard_development_hygiene",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L116",
+      "weight": 1.0,
+      "source": "physioghar_readme_physioghar_therapist_app",
+      "target": "physioghar_readme_design_system_styling_rules",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L186",
+      "weight": 1.0,
+      "source": "physioghar_readme_physioghar_therapist_app",
+      "target": "physioghar_readme_future_improvements_with_more_time",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L138",
+      "weight": 1.0,
+      "source": "physioghar_readme_physioghar_therapist_app",
+      "target": "physioghar_readme_how_to_run_the_project",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "physioghar_readme_physioghar_therapist_app",
+      "target": "physioghar_readme_project_architecture_folder_structure",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L106",
+      "weight": 1.0,
+      "source": "physioghar_readme_physioghar_therapist_app",
+      "target": "physioghar_readme_state_management_rationale",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "physioghar_readme_physioghar_therapist_app",
+      "target": "physioghar_readme_technical_specifications_environment",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "physioghar_readme_project_architecture_folder_structure",
+      "target": "physioghar_readme_codeblock_1",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L144",
+      "weight": 1.0,
+      "source": "physioghar_readme_how_to_run_the_project",
+      "target": "physioghar_readme_installation_steps",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L140",
+      "weight": 1.0,
+      "source": "physioghar_readme_how_to_run_the_project",
+      "target": "physioghar_readme_prerequisites",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L147",
+      "weight": 1.0,
+      "source": "physioghar_readme_installation_steps",
+      "target": "physioghar_readme_codeblock_2",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L153",
+      "weight": 1.0,
+      "source": "physioghar_readme_installation_steps",
+      "target": "physioghar_readme_codeblock_3",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L159",
+      "weight": 1.0,
+      "source": "physioghar_readme_installation_steps",
+      "target": "physioghar_readme_codeblock_4",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L164",
+      "weight": 1.0,
+      "source": "physioghar_readme_installation_steps",
+      "target": "physioghar_readme_codeblock_5",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L169",
+      "weight": 1.0,
+      "source": "physioghar_readme_installation_steps",
+      "target": "physioghar_readme_codeblock_6",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -10650,8 +11484,18 @@
       "confidence_score": 1.0,
       "source": "ios_runner_assets_xcassets_launchimage_imageset_readme_md",
       "target": "launchimage_imageset_readme_launch_screen_assets"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "physioghar_readme_physioghar",
+      "target": "physioghar_readme_getting_started"
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "6334a72c1a476696b4a8e7272d296eca340d0e5e"
+  "built_at_commit": "3549f068db6b528066932bb396cd93aad36d217d"
 }

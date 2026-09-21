@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../providers/providers.dart';
 
@@ -11,11 +12,12 @@ class LanguageScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentLocale = ref.watch(localeProvider);
     final localeNotifier = ref.read(localeProvider.notifier);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Language Settings',
+          l10n.languageSettings,
           style: GoogleFonts.fraunces(fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),
@@ -25,7 +27,7 @@ class LanguageScreen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Select Application Language',
+              l10n.selectLanguage,
               style: GoogleFonts.inter(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
@@ -34,7 +36,7 @@ class LanguageScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              'Changes will update navigation labels and core interface text.',
+              l10n.selectAppLanguage,
               style: GoogleFonts.inter(
                 fontSize: 12,
                 color: AppColors.textMuted,
@@ -46,7 +48,7 @@ class LanguageScreen extends ConsumerWidget {
                 children: [
                   ListTile(
                     title: Text(
-                      'English',
+                      l10n.english,
                       style: GoogleFonts.inter(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
@@ -68,14 +70,14 @@ class LanguageScreen extends ConsumerWidget {
                     onTap: () {
                       localeNotifier.setLocale(AppLocale.en);
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Switched language to English')),
+                        SnackBar(content: Text(l10n.languageUpdated)),
                       );
                     },
                   ),
                   const Divider(height: 1, indent: 16, color: Color(0xFFEFF2EE)),
                   ListTile(
                     title: Text(
-                      'Nepali (नेपाली)',
+                      l10n.nepali,
                       style: GoogleFonts.inter(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
@@ -97,7 +99,7 @@ class LanguageScreen extends ConsumerWidget {
                     onTap: () {
                       localeNotifier.setLocale(AppLocale.ne);
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('भाषा नेपालीमा परिवर्तन गरियो')),
+                        SnackBar(content: Text(l10n.languageUpdated)),
                       );
                     },
                   ),
