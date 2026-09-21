@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../core/theme/app_theme.dart';
-import '../../core/widgets/shared_widgets.dart';
-import '../../data/models/models.dart';
-import '../../providers/providers.dart';
-import '../patients/patient_detail_screen.dart';
+import '../../../core/theme/app_theme.dart';
+import '../../../core/widgets/shared_widgets.dart';
+import '../../../data/models/models.dart';
+import '../../../providers/providers.dart';
+import '../../pages/pages.dart';
 
 class BookingsScreen extends ConsumerStatefulWidget {
   const BookingsScreen({super.key});

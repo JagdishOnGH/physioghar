@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../theme/app_theme.dart';
 import 'shared_widgets.dart';
-import '../../features/patients/patient_detail_screen.dart';
-import '../../features/account/profile_screen.dart';
-import '../../features/account/edit_profile_screen.dart';
-import '../../features/account/language_screen.dart';
-import '../../features/complaints/complaints_screen.dart';
+import '../../features/pages/pages.dart';
+
 
 class ScreenLauncher {
   static void showCatalog(BuildContext context, {Function(int)? onSelectTab}) {

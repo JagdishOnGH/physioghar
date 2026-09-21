@@ -1,0 +1,10 @@
+export '../account/pages/account_page.dart';
+export '../account/pages/edit_profile_page.dart';
+export '../account/pages/language_page.dart';
+export '../account/pages/profile_page.dart';
+export '../bookings/pages/bookings_page.dart';
+export '../complaints/pages/complaints_page.dart';
+export '../dashboard/pages/dashboard_page.dart';
+export '../patients/pages/patient_detail_page.dart';
+export '../patients/pages/patient_list_page.dart';
+export '../schedule/pages/schedule_page.dart';

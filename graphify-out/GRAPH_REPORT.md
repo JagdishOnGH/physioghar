@@ -1,16 +1,16 @@
 # Graph Report - physioghar  (2026-09-21)
 
 ## Corpus Check
-- 61 files · ~60,108 words
+- 79 files · ~60,175 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 487 nodes · 467 edges · 45 communities (36 shown, 9 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 8 edges (avg confidence: 0.8)
+- 577 nodes · 539 edges · 63 communities (45 shown, 18 thin omitted)
+- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 8 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `cd08bfda`
+- Built from commit: `6334a72c`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -54,6 +54,22 @@
 - [[_COMMUNITY_Community 36|Community 36]]
 - [[_COMMUNITY_Community 37|Community 37]]
 - [[_COMMUNITY_Community 38|Community 38]]
+- [[_COMMUNITY_Community 45|Community 45]]
+- [[_COMMUNITY_Community 46|Community 46]]
+- [[_COMMUNITY_Community 47|Community 47]]
+- [[_COMMUNITY_Community 48|Community 48]]
+- [[_COMMUNITY_Community 49|Community 49]]
+- [[_COMMUNITY_Community 50|Community 50]]
+- [[_COMMUNITY_Community 51|Community 51]]
+- [[_COMMUNITY_Community 52|Community 52]]
+- [[_COMMUNITY_Community 53|Community 53]]
+- [[_COMMUNITY_Community 54|Community 54]]
+- [[_COMMUNITY_Community 55|Community 55]]
+- [[_COMMUNITY_Community 56|Community 56]]
+- [[_COMMUNITY_Community 57|Community 57]]
+- [[_COMMUNITY_Community 58|Community 58]]
+- [[_COMMUNITY_Community 59|Community 59]]
+- [[_COMMUNITY_Community 60|Community 60]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `PhysioGhar Therapist App — AI Build Guidelines` - 10 edges
@@ -79,7 +95,7 @@
 - `OnCreate()` --calls--> `SetChildContent()`  [INFERRED]
   windows/runner/flutter_window.cpp → windows/runner/win32_window.cpp
 
-## Communities (45 total, 9 thin omitted)
+## Communities (63 total, 18 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.06
@@ -91,43 +107,43 @@ Nodes (22): RegisterPlugins(), OnCreate(), Create(), Destroy(), EnableFullDpiSup
 
 ### Community 2 - "Community 2"
 Cohesion: 0.08
-Nodes (24): ../../core/constants/enums.dart, ../../core/theme/app_theme.dart, ../../core/widgets/shared_widgets.dart, ../../data/models/models.dart, package:flutter/material.dart, package:flutter_riverpod/flutter_riverpod.dart, package:google_fonts/google_fonts.dart, ../../providers/providers.dart (+16 more)
+Nodes (23): ../../../core/constants/enums.dart, ../../../core/theme/app_theme.dart, ../../../core/widgets/shared_widgets.dart, ../../../data/models/models.dart, package:flutter/material.dart, package:flutter_riverpod/flutter_riverpod.dart, package:google_fonts/google_fonts.dart, ../../../providers/providers.dart (+15 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.08
-Nodes (23): features/account/account_screen.dart, features/bookings/bookings_screen.dart, features/dashboard/dashboard_screen.dart, features/patients/patient_list_screen.dart, features/schedule/schedule_screen.dart, AccountScreen, BookingsScreen, build (+15 more)
+Nodes (24): features/account/account_screen.dart, features/bookings/bookings_screen.dart, features/dashboard/dashboard_screen.dart, features/patients/patient_list_screen.dart, features/schedule/schedule_screen.dart, AccountScreen, BookingsScreen, build (+16 more)
 
 ### Community 4 - "Community 4"
 Cohesion: 0.09
-Nodes (22): BookingsScreen, _BookingsScreenState, build, _buildSessionListView, dispose, EmptyState, initState, Scaffold (+14 more)
+Nodes (22): ../../../core/theme/app_theme.dart, ../../../core/widgets/shared_widgets.dart, ../../../data/models/models.dart, package:flutter/material.dart, package:flutter_riverpod/flutter_riverpod.dart, package:google_fonts/google_fonts.dart, ../../pages/pages.dart, ../../../providers/providers.dart (+14 more)
 
 ### Community 5 - "Community 5"
-Cohesion: 0.09
-Nodes (21): ../account/profile_screen.dart, build, _buildShortcutTile, _buildSummaryCard, DashboardScreen, EmptyState, Function, GestureDetector (+13 more)
+Cohesion: 0.10
+Nodes (20): edit_profile_page.dart, ../../../core/theme/app_theme.dart, ../../../core/widgets/shared_widgets.dart, package:flutter/material.dart, package:flutter_riverpod/flutter_riverpod.dart, package:google_fonts/google_fonts.dart, ../../../providers/providers.dart, build (+12 more)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.10
-Nodes (20): build, _buildContactRow, _buildSectionTitle, _buildStatItem, Column, Container, Divider, Icon (+12 more)
+Nodes (20): ../../../core/constants/enums.dart, ../../../core/theme/app_theme.dart, ../../../core/widgets/shared_widgets.dart, package:flutter/material.dart, package:google_fonts/google_fonts.dart, build, _buildFieldLabel, _buildFormView (+12 more)
 
 ### Community 7 - "Community 7"
 Cohesion: 0.10
-Nodes (20): build, _buildFieldLabel, _buildFormView, _buildSuccessView, ComplaintsScreen, _ComplaintsScreenState, Container, dispose (+12 more)
+Nodes (20): ../../../core/theme/app_theme.dart, ../../../core/widgets/shared_widgets.dart, package:flutter/material.dart, package:flutter_riverpod/flutter_riverpod.dart, package:google_fonts/google_fonts.dart, package:intl/intl.dart, ../../pages/pages.dart, ../../../providers/providers.dart (+12 more)
 
 ### Community 8 - "Community 8"
-Cohesion: 0.09
-Nodes (21): ../../core/theme/app_theme.dart, ../../core/widgets/shared_widgets.dart, ../../data/models/models.dart, package:flutter/material.dart, package:flutter_riverpod/flutter_riverpod.dart, package:google_fonts/google_fonts.dart, package:intl/intl.dart, ../../providers/providers.dart (+13 more)
+Cohesion: 0.10
+Nodes (19): ../../../core/theme/app_theme.dart, ../../../core/widgets/shared_widgets.dart, ../../../data/models/models.dart, package:flutter/material.dart, package:flutter_riverpod/flutter_riverpod.dart, package:google_fonts/google_fonts.dart, package:intl/intl.dart, ../../../providers/providers.dart (+11 more)
 
 ### Community 9 - "Community 9"
-Cohesion: 0.09
-Nodes (21): AccountScreen, build, _buildMenuSection, CircleAvatar, Column, Divider, _MenuItem, Scaffold (+13 more)
+Cohesion: 0.11
+Nodes (17): ../../../core/theme/app_theme.dart, ../../../core/widgets/shared_widgets.dart, package:flutter/material.dart, package:flutter_riverpod/flutter_riverpod.dart, package:google_fonts/google_fonts.dart, ../../../providers/providers.dart, build, _buildFieldLabel (+9 more)
 
 ### Community 10 - "Community 10"
 Cohesion: 0.11
 Nodes (7): fl_register_plugins(), main(), my_application_activate(), my_application_new(), _MyApplication, dart_entrypoint_arguments, parent_instance
 
 ### Community 11 - "Community 11"
-Cohesion: 0.11
-Nodes (17): build, _buildFieldLabel, dispose, EditProfileScreen, _EditProfileScreenState, initState, Padding, _saveProfile (+9 more)
+Cohesion: 0.12
+Nodes (16): ../../../core/theme/app_theme.dart, ../../../core/widgets/screen_launcher.dart, package:flutter/material.dart, package:google_fonts/google_fonts.dart, AccountScreen, build, _buildMenuSection, CircleAvatar (+8 more)
 
 ### Community 12 - "Community 12"
 Cohesion: 0.12
@@ -139,11 +155,11 @@ Nodes (16): dart:async, dart:io, dart:typed_data, package:flutter_test/flutter_t
 
 ### Community 14 - "Community 14"
 Cohesion: 0.12
-Nodes (15): ../../core/theme/app_theme.dart, ../../core/widgets/shared_widgets.dart, package:flutter/material.dart, package:flutter_riverpod/flutter_riverpod.dart, package:google_fonts/google_fonts.dart, package:intl/intl.dart, ../../providers/providers.dart, patient_detail_screen.dart (+7 more)
+Nodes (15): ../../../core/theme/app_theme.dart, ../../../core/widgets/shared_widgets.dart, package:flutter/material.dart, package:flutter_riverpod/flutter_riverpod.dart, package:google_fonts/google_fonts.dart, package:intl/intl.dart, ../../../providers/providers.dart, build (+7 more)
 
 ### Community 15 - "Community 15"
-Cohesion: 0.14
-Nodes (13): ../../features/account/edit_profile_screen.dart, ../../features/account/language_screen.dart, ../../features/account/profile_screen.dart, ../../features/complaints/complaints_screen.dart, ../../features/patients/patient_detail_screen.dart, package:flutter/material.dart, package:google_fonts/google_fonts.dart, ../theme/app_theme.dart (+5 more)
+Cohesion: 0.13
+Nodes (14): ../../features/account/edit_profile_screen.dart, ../../features/account/language_screen.dart, ../../features/account/profile_screen.dart, ../../features/complaints/complaints_screen.dart, ../../features/patients/patient_detail_screen.dart, ../../features/pages/pages.dart, package:flutter/material.dart, package:google_fonts/google_fonts.dart (+6 more)
 
 ### Community 16 - "Community 16"
 Cohesion: 0.18
@@ -158,8 +174,8 @@ Cohesion: 0.17
 Nodes (11): ../../core/constants/enums.dart, copyWith, Patient, PatientNote, SessionBooking, Slot, TherapistProfile, TicketComplaint (+3 more)
 
 ### Community 19 - "Community 19"
-Cohesion: 0.17
-Nodes (11): build, Divider, LanguageScreen, Scaffold, SizedBox, SnackBar, ../../core/theme/app_theme.dart, package:flutter/material.dart (+3 more)
+Cohesion: 0.14
+Nodes (13): ../core/constants/enums.dart, ../data/mock/mock_data.dart, ../data/models/models.dart, package:flutter_riverpod/flutter_riverpod.dart, addSlot, blockSlot, build, copyWith (+5 more)
 
 ### Community 20 - "Community 20"
 Cohesion: 0.18
@@ -198,28 +214,56 @@ Cohesion: 0.40
 Nodes (4): images, info, author, version
 
 ### Community 30 - "Community 30"
+Cohesion: 0.20
+Nodes (9): ../../core/constants/enums.dart, ../models/models.dart, MockData, mock_notes.dart, mock_patients.dart, mock_profile.dart, mock_sessions.dart, mock_slots.dart (+1 more)
+
+### Community 45 - "Community 45"
+Cohesion: 0.15
+Nodes (12): ../core/constants/enums.dart, ../data/mock/mock_data.dart, ../data/models/models.dart, package:flutter_riverpod/flutter_riverpod.dart, accept, BookingNotifier, BookingState, build (+4 more)
+
+### Community 46 - "Community 46"
+Cohesion: 0.17
+Nodes (11): ../../../core/theme/app_theme.dart, package:flutter/material.dart, package:flutter_riverpod/flutter_riverpod.dart, package:google_fonts/google_fonts.dart, ../../../providers/providers.dart, build, Divider, LanguageScreen (+3 more)
+
+### Community 47 - "Community 47"
+Cohesion: 0.17
+Nodes (11): ../data/mock/mock_data.dart, ../data/models/models.dart, package:flutter_riverpod/flutter_riverpod.dart, addNote, build, copyWith, editNote, PatientNotifier (+3 more)
+
+### Community 48 - "Community 48"
+Cohesion: 0.25
+Nodes (7): ../data/mock/mock_data.dart, ../data/models/models.dart, package:flutter_riverpod/flutter_riverpod.dart, build, ProfileNotifier, update, updateProfile
+
+### Community 49 - "Community 49"
+Cohesion: 0.29
+Nodes (6): ../../core/constants/enums.dart, copyWith, SessionBooking, toCancelled, toCompleted, toUpcoming
+
+### Community 50 - "Community 50"
+Cohesion: 0.29
+Nodes (6): package:flutter_riverpod/flutter_riverpod.dart, build, LocaleNotifier, setLocale, toggleLocale, translate
+
+### Community 51 - "Community 51"
 Cohesion: 0.50
-Nodes (3): ../../core/constants/enums.dart, MockData, ../models/models.dart
+Nodes (3): ../../core/constants/enums.dart, copyWith, Slot
 
 ## Knowledge Gaps
-- **355 isolated node(s):** `MainActivity`, `flutter_export_environment.sh script`, `SBFrame`, `SBDebugger`, `-registerWithRegistry` (+350 more)
+- **427 isolated node(s):** `MainActivity`, `flutter_export_environment.sh script`, `SBFrame`, `SBDebugger`, `-registerWithRegistry` (+422 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **9 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **18 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `OnCreate()` connect `Community 1` to `Community 16`?**
-  _High betweenness centrality (0.002) - this node is a cross-community bridge._
+  _High betweenness centrality (0.001) - this node is a cross-community bridge._
 - **What connects `MainActivity`, `flutter_export_environment.sh script`, `SBFrame` to the rest of the system?**
-  _356 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _428 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.06060606060606061 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.1032258064516129 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
-  _Cohesion score 0.08 - nodes in this community are weakly interconnected._
-- **Should `Community 3` be split into smaller, more focused modules?**
   _Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected._
+- **Should `Community 3` be split into smaller, more focused modules?**
+  _Cohesion score 0.08 - nodes in this community are weakly interconnected._
 - **Should `Community 4` be split into smaller, more focused modules?**
   _Cohesion score 0.08695652173913043 - nodes in this community are weakly interconnected._

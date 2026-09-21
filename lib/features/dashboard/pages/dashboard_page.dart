@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import '../../core/theme/app_theme.dart';
-import '../../core/widgets/shared_widgets.dart';
-import '../../providers/providers.dart';
-import '../account/profile_screen.dart';
-import '../patients/patient_detail_screen.dart';
+import '../../../core/theme/app_theme.dart';
+import '../../../core/widgets/shared_widgets.dart';
+import '../../../providers/providers.dart';
+import '../../pages/pages.dart';
 
 class DashboardScreen extends ConsumerWidget {
   final Function(int)? onNavigateTab;

@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../core/theme/app_theme.dart';
-import '../../core/widgets/screen_launcher.dart';
-import 'profile_screen.dart';
-import 'edit_profile_screen.dart';
-import 'language_screen.dart';
-import '../complaints/complaints_screen.dart';
+import '../../../core/theme/app_theme.dart';
+import '../../../core/widgets/screen_launcher.dart';
+import '../../pages.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});

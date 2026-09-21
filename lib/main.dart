@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/theme/app_theme.dart';
 import 'core/widgets/screen_launcher.dart';
-import 'features/dashboard/dashboard_screen.dart';
-import 'features/schedule/schedule_screen.dart';
-import 'features/bookings/bookings_screen.dart';
-import 'features/patients/patient_list_screen.dart';
-import 'features/account/account_screen.dart';
+import 'features/pages/pages.dart';
+
 
 void main() {
   runApp(const ProviderScope(child: PhysioGharApp()));

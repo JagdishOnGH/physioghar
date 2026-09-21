@@ -75,8 +75,8 @@
     "semantic_hash": ""
   },
   "G:\\flatter_project\\physioghar\\lib\\main.dart": {
-    "mtime": 1789931761.2240205,
-    "ast_hash": "572016914bedbad015ff63fca3d1fd56",
+    "mtime": 1790009563.0284061,
+    "ast_hash": "43592f029827a70556bab0cf729c1683",
     "semantic_hash": ""
   },
   "G:\\flatter_project\\physioghar\\lib\\core\\constants\\enums.dart": {
@@ -90,8 +90,8 @@
     "semantic_hash": ""
   },
   "G:\\flatter_project\\physioghar\\lib\\core\\widgets\\screen_launcher.dart": {
-    "mtime": 1789929390.8836267,
-    "ast_hash": "d0b8ad1d3c4d5ae720da2ef235dd95b1",
+    "mtime": 1790009598.5344265,
+    "ast_hash": "5ca19bca0c1731c99457f0c510f7a58b",
     "semantic_hash": ""
   },
   "G:\\flatter_project\\physioghar\\lib\\core\\widgets\\shared_widgets.dart": {
@@ -100,68 +100,18 @@
     "semantic_hash": ""
   },
   "G:\\flatter_project\\physioghar\\lib\\data\\mock\\mock_data.dart": {
-    "mtime": 1789928699.7648208,
-    "ast_hash": "14e001a9d589c9fa6602c0bf3e1adbc4",
+    "mtime": 1790009887.1090703,
+    "ast_hash": "161603bcf0b673421585ba42bf052721",
     "semantic_hash": ""
   },
   "G:\\flatter_project\\physioghar\\lib\\data\\models\\models.dart": {
-    "mtime": 1789930399.0483413,
-    "ast_hash": "8d6fb9e639f59bbf10a8ea3224f53d33",
-    "semantic_hash": ""
-  },
-  "G:\\flatter_project\\physioghar\\lib\\features\\account\\account_screen.dart": {
-    "mtime": 1789931313.900813,
-    "ast_hash": "beb35aec2e081f91fcd0dc3d73d8e080",
-    "semantic_hash": ""
-  },
-  "G:\\flatter_project\\physioghar\\lib\\features\\account\\edit_profile_screen.dart": {
-    "mtime": 1789929001.0234587,
-    "ast_hash": "71d9b4cc6edabde83d6402bc7a426d05",
-    "semantic_hash": ""
-  },
-  "G:\\flatter_project\\physioghar\\lib\\features\\account\\language_screen.dart": {
-    "mtime": 1789929153.1456993,
-    "ast_hash": "005898138e5f6911cbd42f9c5ba20ad5",
-    "semantic_hash": ""
-  },
-  "G:\\flatter_project\\physioghar\\lib\\features\\account\\profile_screen.dart": {
-    "mtime": 1789929061.5458436,
-    "ast_hash": "484aa733a90240cdfa40f4778ffd6998",
-    "semantic_hash": ""
-  },
-  "G:\\flatter_project\\physioghar\\lib\\features\\bookings\\bookings_screen.dart": {
-    "mtime": 1789931909.7603393,
-    "ast_hash": "39858b26e129060de1bee2b1f92d9992",
-    "semantic_hash": ""
-  },
-  "G:\\flatter_project\\physioghar\\lib\\features\\complaints\\complaints_screen.dart": {
-    "mtime": 1789929074.1146493,
-    "ast_hash": "1ffdb73eef3511a752f6ee00c99831b3",
-    "semantic_hash": ""
-  },
-  "G:\\flatter_project\\physioghar\\lib\\features\\dashboard\\dashboard_screen.dart": {
-    "mtime": 1789930437.6616733,
-    "ast_hash": "57c399204e1eace666ae7eef9e385297",
-    "semantic_hash": ""
-  },
-  "G:\\flatter_project\\physioghar\\lib\\features\\patients\\patient_detail_screen.dart": {
-    "mtime": 1789931880.4803567,
-    "ast_hash": "7b128d2e398008214671601de2c13220",
-    "semantic_hash": ""
-  },
-  "G:\\flatter_project\\physioghar\\lib\\features\\patients\\patient_list_screen.dart": {
-    "mtime": 1789931178.6283202,
-    "ast_hash": "a9e7dacb7dcca0602497faf665075ce6",
-    "semantic_hash": ""
-  },
-  "G:\\flatter_project\\physioghar\\lib\\features\\schedule\\schedule_screen.dart": {
-    "mtime": 1789931894.7264676,
-    "ast_hash": "a02a3afd2a12a4b946279b3537fdab59",
+    "mtime": 1790009537.9703176,
+    "ast_hash": "3d2de6001ded5a45ae631b6222ba4244",
     "semantic_hash": ""
   },
   "G:\\flatter_project\\physioghar\\lib\\providers\\providers.dart": {
-    "mtime": 1789931285.725686,
-    "ast_hash": "fb2271d00228fef46a64ccc883b23968",
+    "mtime": 1790009417.8009832,
+    "ast_hash": "ffa4ce64f31549fa8b29ec8fdc1f7fca",
     "semantic_hash": ""
   },
   "G:\\flatter_project\\physioghar\\linux\\flutter\\generated_plugin_registrant.cc": {
@@ -627,6 +577,146 @@
   "G:\\flatter_project\\physioghar\\WHAT_TO_EXPECT.txt": {
     "mtime": 1789931543.5163817,
     "ast_hash": "3a06869d9f8d23a6f93bcb8f9d237005",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\data\\mock\\mock_notes.dart": {
+    "mtime": 1790009849.4783013,
+    "ast_hash": "eb61f5c76241ddfb97f9acaa5c87bd98",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\data\\mock\\mock_patients.dart": {
+    "mtime": 1790009837.4779334,
+    "ast_hash": "fc2356093991ed042f659f4191871a5f",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\data\\mock\\mock_profile.dart": {
+    "mtime": 1790009825.9335527,
+    "ast_hash": "31620654445caf7b91d8b4fff9198b0e",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\data\\mock\\mock_sessions.dart": {
+    "mtime": 1790009874.3719387,
+    "ast_hash": "46c01f20fcdcf54d78abb8f7bb4ecf0e",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\data\\mock\\mock_slots.dart": {
+    "mtime": 1790009861.6154623,
+    "ast_hash": "31054acd5d01b0b64784f470c793e30e",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\data\\models\\patient.dart": {
+    "mtime": 1790009455.585562,
+    "ast_hash": "8effe38ebc6bed8b874fdad8fee1ca4d",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\data\\models\\patient_note.dart": {
+    "mtime": 1790009467.5360763,
+    "ast_hash": "d5c02bb9a207d58486fc9a65c90607c7",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\data\\models\\session_booking.dart": {
+    "mtime": 1790009494.2188406,
+    "ast_hash": "a2ce9f69e63c2a9c3b95418d9b400e68",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\data\\models\\slot.dart": {
+    "mtime": 1790009480.3326845,
+    "ast_hash": "e2480ab21681d586efa329300efb6ef5",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\data\\models\\therapist_profile.dart": {
+    "mtime": 1790009510.0136511,
+    "ast_hash": "11487e9a182b3fecffbb296839392a1d",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\data\\models\\ticket_complaint.dart": {
+    "mtime": 1790009524.3464067,
+    "ast_hash": "5e4cca704950bb288632fca63a0a5143",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\features\\pages.dart": {
+    "mtime": 1790009442.9140992,
+    "ast_hash": "5e431d400e4519c53476168f2efcf42a",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\features\\account\\pages\\account_page.dart": {
+    "mtime": 1790009681.5289352,
+    "ast_hash": "e4146912b53948cd350877bf7a7d4c00",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\features\\account\\pages\\edit_profile_page.dart": {
+    "mtime": 1790009570.0297298,
+    "ast_hash": "1de04b629080c7d20e2f8a029a03a497",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\features\\account\\pages\\language_page.dart": {
+    "mtime": 1790009600.7280579,
+    "ast_hash": "eb3d1f4ab0d50b86874d1d7d54bb15fc",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\features\\account\\pages\\profile_page.dart": {
+    "mtime": 1790009769.314777,
+    "ast_hash": "9b3da4bd9ddf6823c87a861e9e543149",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\features\\bookings\\pages\\bookings_page.dart": {
+    "mtime": 1790009671.7247431,
+    "ast_hash": "b5f1ce5a43ab6fef5f3f45cfaba8fdd3",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\features\\complaints\\pages\\complaints_page.dart": {
+    "mtime": 1790009815.00149,
+    "ast_hash": "4c63aeae655f853fdac1b639f9953789",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\features\\dashboard\\pages\\dashboard_page.dart": {
+    "mtime": 1790009622.7361991,
+    "ast_hash": "bab96b681e203ddbdaf60877247d1720",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\features\\pages\\pages.dart": {
+    "mtime": 1790009430.228801,
+    "ast_hash": "c7324ecc4f17955788ff7776a5cddff3",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\features\\patients\\pages\\patient_detail_page.dart": {
+    "mtime": 1790009739.6769862,
+    "ast_hash": "fc5293830750eff04637697d1b64ea65",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\features\\patients\\pages\\patient_list_page.dart": {
+    "mtime": 1790009712.255269,
+    "ast_hash": "a61661cdfacd147c0502fafd0f88546e",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\features\\schedule\\pages\\schedule_page.dart": {
+    "mtime": 1790009644.499074,
+    "ast_hash": "b56c599b691a35750bab49d03dc4b362",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\providers\\booking_provider.dart": {
+    "mtime": 1790009366.7784047,
+    "ast_hash": "653e9e4df0029a002e7a9905dc6147d8",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\providers\\locale_provider.dart": {
+    "mtime": 1790009405.5894544,
+    "ast_hash": "534ee33f78cac976bb90b40a06d4b1ce",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\providers\\patient_provider.dart": {
+    "mtime": 1790009379.0284946,
+    "ast_hash": "0d64cb47a19d8ad4148c4eec3f5c2a15",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\providers\\profile_provider.dart": {
+    "mtime": 1790009392.4089034,
+    "ast_hash": "d582ab66c159bffe9815e0b0b7be4909",
+    "semantic_hash": ""
+  },
+  "G:\\flatter_project\\physioghar\\lib\\providers\\schedule_provider.dart": {
+    "mtime": 1790009353.7076223,
+    "ast_hash": "1502c97e3908bfa5f1c28bff1e3edeec",
     "semantic_hash": ""
   }
 }
